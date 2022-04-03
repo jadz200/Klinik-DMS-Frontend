@@ -1,0 +1,111 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 14px;
+}
+
+@media only screen and (max-width: 900px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  html {
+    font-size: 10px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  html {
+    font-size: 9px;
+  }
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+.main-content {
+  height: calc(100vh - 4rem);
+  overflow-y: auto;
+  background-color: #f3f6f8;
+}
+
+.header-main-content {
+  box-shadow: 0 10px 30px 0 rgb(82 63 105 / 5%);
+  border-top: 1px solid #eff2f5;
+}
+
+.topbar {
+  background-color: #fff;
+}
+
+.sidebar {
+  box-shadow: 0 0 28px 0 rgb(82 63 105 / 5%);
+  transition: width 0.5s;
+  background-color: #1e1e2d;
+}
+
+.nav-item {
+  background-color: inherit;
+  color: #a1a1a1;
+  transition: all 0.2s;
+}
+
+.active {
+  background-color: #1a1a27;
+}
+
+.active > .nav-icon {
+  color: #6366f1;
+}
+
+.active > .nav-text {
+  color: #fff;
+  font-weight: 500;
+}
+
+.nav-item:hover {
+  background-color: #1a1a27;
+  color: #fff;
+}
+
+.sidebar-header {
+  background-color: #1a1a27;
+}
+
+.sidebar-footer {
+  color: #c1c1c1;
+  background-color: #1a1a27;
+  width: max-content;
+}
+
+.p-button:focus {
+  outline: 2px solid #6366f1 !important;
+  box-shadow: none !important;
+}
+
+.bg-login {
+  background-image: url("./assets/images/Background.jpg");
+}
+
+.elements-gap > * {
+  margin-right: 1rem !important;
+}
+
+.elements-gap > *:last-child {
+  margin-right: 0rem !important;
+}
+
+.p-button.p-button-sm .p-button-icon {
+  font-size: 1rem !important;
+}
