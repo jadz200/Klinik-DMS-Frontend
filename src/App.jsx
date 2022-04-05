@@ -23,6 +23,7 @@ import ListSecretary from "./pages/Secretary/ListSecretary";
 import EditSecretary from "./pages/Secretary/EditSecretary";
 import DetailSecretary from "./pages/Secretary/DetailSecretary";
 import CreateSecretary from "./pages/Secretary/CreateSecretary";
+import Appointment from "./pages/Appointment/Appointment";
 
 function App() {
   // Login to show which page to show
@@ -78,6 +79,7 @@ function App() {
                   ></Route>
                   <Route path="create" element={<CreateSecretary />}></Route>
                 </Route>
+                <Route path="appointment" element={<Appointment />} />
               </Routes>
             </div>
           </div>
