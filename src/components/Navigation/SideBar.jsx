@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 
 //Icons / Images
 import { GiPerson, GiDoctorFace } from "react-icons/gi";
+import { HiOutlineDesktopComputer } from "react-icons/hi";
 import Logo from "@assets/images/Logo.png";
 
 // eslint-disable-next-line react/prop-types
@@ -19,6 +20,11 @@ const SideBar = ({ sideBar, setSideBar }) => {
       path: "/doctor",
       text: "Doctors",
       icon: <GiDoctorFace />,
+    },
+    {
+      path: "/secretary",
+      text: "Secretaries",
+      icon: <HiOutlineDesktopComputer />,
     },
   ];
   return (

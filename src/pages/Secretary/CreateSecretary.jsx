@@ -1,36 +1,14 @@
 import React from "react";
-import * as Yup from "yup";
-import { useFormik } from "formik";
-import { useNavigate, useParams } from "react-router-dom";
-import { Card } from "primereact/card";
 import { InputText } from "primereact/inputtext";
-import { useDoctorData } from "../../hooks/Queries/useDoctorData";
-import { useEditDoctorData } from "../../hooks/Queries/useDoctorsData";
+import { Card } from "primereact/card";
+import * as Yup from "yup";
+import { useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import { useAddSecretaryData } from "../../hooks/Queries/useSecretariesData";
 
-const EditDoctor = () => {
-  const { id } = useParams();
-  const { isLoading, data, error, isError, isPreviousData } = useDoctorData(id);
-  console.log(data);
-
-  if (isLoading || isPreviousData) {
-    return <h2>Loading...</h2>;
-  }
-
-  if (isError) {
-    return <h2>{error.message}</h2>;
-  }
-
-  return (
-    <>
-      <Form data={data} id={id} />
-    </>
-  );
-};
-
-const Form = ({ data, id }) => {
-  console.log(data);
-  const { mutate: editDoctor } = useEditDoctorData();
+const CreateSecretary = () => {
   const navigate = useNavigate();
+  const { mutate: addDoctor } = useAddSecretaryData();
   const validationSchema = Yup.object({
     first_name: Yup.string().required("First Name is Required"),
     last_name: Yup.string().required("Last Name is Required"),
@@ -41,23 +19,23 @@ const Form = ({ data, id }) => {
   });
   const formik = useFormik({
     initialValues: {
-      first_name: data.first_name,
-      last_name: data.last_name,
-      mail: data.mail,
-      phone: data.phone,
+      first_name: "",
+      last_name: "",
+      mail: "",
+      phone: "",
     },
-    enableReinitialize: true,
     onSubmit: (values) => {
-      const doctor = { ...values, id, clinicID: 1, roleID: 1 };
-      editDoctor(doctor);
+      let secretary = { ...values, clinicID: 1, roleID: 2 };
+      console.log(secretary);
+      addDoctor(secretary);
 
-      navigate("/doctor");
+      navigate("/secretary");
     },
     validationSchema,
   });
   return (
     <Card>
-      <form id="editDoctor" onSubmit={formik.handleSubmit}>
+      <form id="createSecretary" onSubmit={formik.handleSubmit}>
         <label htmlFor="first_name" className="mb-1 inline-block">
           First Name:
         </label>
@@ -131,4 +109,4 @@ const Form = ({ data, id }) => {
   );
 };
 
-export default EditDoctor;
+export default CreateSecretary;

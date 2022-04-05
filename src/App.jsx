@@ -18,6 +18,11 @@ import ListDoctor from "./pages/Doctor/ListDoctor";
 import EditDoctor from "./pages/Doctor/EditDoctor";
 import DetailDoctor from "./pages/Doctor/DetailDoctor";
 import CreateDoctor from "./pages/Doctor/CreateDoctor";
+import Secretary from "./pages/Secretary/Secretary";
+import ListSecretary from "./pages/Secretary/ListSecretary";
+import EditSecretary from "./pages/Secretary/EditSecretary";
+import DetailSecretary from "./pages/Secretary/DetailSecretary";
+import CreateSecretary from "./pages/Secretary/CreateSecretary";
 
 function App() {
   // Login to show which page to show
@@ -63,6 +68,15 @@ function App() {
                   <Route path=":id/edit" element={<EditDoctor />}></Route>
                   <Route path=":id/detail" element={<DetailDoctor />}></Route>
                   <Route path="create" element={<CreateDoctor />}></Route>
+                </Route>
+                <Route path="secretary" element={<Secretary />}>
+                  <Route index element={<ListSecretary />}></Route>
+                  <Route path=":id/edit" element={<EditSecretary />}></Route>
+                  <Route
+                    path=":id/detail"
+                    element={<DetailSecretary />}
+                  ></Route>
+                  <Route path="create" element={<CreateSecretary />}></Route>
                 </Route>
               </Routes>
             </div>
