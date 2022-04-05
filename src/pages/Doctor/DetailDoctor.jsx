@@ -1,10 +1,10 @@
 import React from "react";
+import { useDoctorData } from "../../hooks/Queries/useDoctorData";
 import { useParams } from "react-router-dom";
-import { usePatientData } from "../../hooks/Queries/usePatientData";
 
-const DetailPatient = () => {
+const DetailDoctor = () => {
   const { id } = useParams();
-  const { isLoading, data, error, isError } = usePatientData(id);
+  const { isLoading, data, error, isError } = useDoctorData(id);
 
   if (isLoading) {
     return <h2>Loading...</h2>;
@@ -17,4 +17,4 @@ const DetailPatient = () => {
   return <div>{JSON.stringify(data)}</div>;
 };
 
-export default DetailPatient;
+export default DetailDoctor;

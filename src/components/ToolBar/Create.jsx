@@ -21,7 +21,6 @@ const Create = ({ moduleName }) => {
         iconPos="right"
         className="p-button-sm p-button-secondary p-button-outlined"
         onClick={() => {
-          console.log("ITS RUNNING");
           navigate(-1);
         }}
       />

@@ -19,7 +19,6 @@ const deletePatient = (id) => {
 };
 
 const editPatient = (patient) => {
-  console.log(patient);
   return axios.put(`${baseURL}/patient/${patient.id}/update/`, patient);
 };
 

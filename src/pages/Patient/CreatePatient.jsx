@@ -3,7 +3,7 @@ import { Card } from "primereact/card";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { InputText } from "primereact/inputtext";
-import { useAddPatientData } from "../../hooks/Queries/usePatientsData";
+import { useAddPatientData } from "@hooks/Queries/usePatientsData";
 import { useNavigate } from "react-router-dom";
 
 const CreatePatient = () => {
@@ -28,11 +28,9 @@ const CreatePatient = () => {
       address: "",
     },
     onSubmit: (values) => {
-      console.log(values);
       addPatient(values);
 
       navigate("/patient");
-      console.log("Navigate");
     },
     validationSchema,
   });

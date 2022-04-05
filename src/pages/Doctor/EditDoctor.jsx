@@ -1,17 +1,18 @@
 import React from "react";
+import * as Yup from "yup";
+import { useFormik } from "formik";
 import { useNavigate, useParams } from "react-router-dom";
 import { Card } from "primereact/card";
 import { InputText } from "primereact/inputtext";
-import { useEditPatientData } from "../../hooks/Queries/usePatientsData";
-import { usePatientData } from "../../hooks/Queries/usePatientData";
-import * as Yup from "yup";
-import { useFormik } from "formik";
+import { useDoctorData } from "../../hooks/Queries/useDoctorData";
+import { useEditDoctorData } from "../../hooks/Queries/useDoctorsData";
 
-const EditPatient = () => {
+const EditDoctor = () => {
   const { id } = useParams();
-  const { isLoading, data, error, isError } = usePatientData(id);
+  const { isLoading, data, error, isError, isPreviousData } = useDoctorData(id);
+  console.log(data);
 
-  if (isLoading) {
+  if (isLoading || isPreviousData) {
     return <h2>Loading...</h2>;
   }
 
@@ -27,7 +28,8 @@ const EditPatient = () => {
 };
 
 const Form = ({ data, id }) => {
-  const { mutate: editPatient } = useEditPatientData();
+  console.log(data);
+  const { mutate: editDoctor } = useEditDoctorData();
   const navigate = useNavigate();
   const validationSchema = Yup.object({
     first_name: Yup.string().required("First Name is Required"),
@@ -36,9 +38,7 @@ const Form = ({ data, id }) => {
       .email("Invalid Email Format")
       .required("Email is Required"),
     phone: Yup.string().required("Phone Number is Required"),
-    address: Yup.string().required("Address is Required"),
   });
-
   const formik = useFormik({
     initialValues: {
       first_name: data.first_name,
@@ -49,16 +49,16 @@ const Form = ({ data, id }) => {
     },
     enableReinitialize: true,
     onSubmit: (values) => {
-      const patient = { ...values, id };
-      editPatient(patient);
+      const doctor = { ...values, id, clinicID: 1, roleID: 1 };
+      editDoctor(doctor);
 
-      navigate("/patient");
+      navigate("/doctor");
     },
     validationSchema,
   });
   return (
     <Card>
-      <form id="editPatient" onSubmit={formik.handleSubmit}>
+      <form id="editDoctor" onSubmit={formik.handleSubmit}>
         <label htmlFor="first_name" className="mb-1 inline-block">
           First Name:
         </label>
@@ -127,26 +127,9 @@ const Form = ({ data, id }) => {
             <span>{formik.errors.mail}</span>
           ) : null}
         </div>
-        {/*  */}
-        <label htmlFor="address" className="mb-1 inline-block">
-          Address:
-        </label>
-        <InputText
-          id="address"
-          type="text"
-          className="inputfield w-full"
-          name="address"
-          autoComplete="nope"
-          {...formik.getFieldProps("address")}
-        />
-        <div className="p-error h-1rem">
-          {formik.touched.address && formik.errors.address ? (
-            <span>{formik.errors.address}</span>
-          ) : null}
-        </div>
       </form>
     </Card>
   );
 };
 
-export default EditPatient;
+export default EditDoctor;

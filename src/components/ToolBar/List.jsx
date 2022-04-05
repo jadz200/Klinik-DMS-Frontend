@@ -38,7 +38,6 @@ const List = ({ deleteFunction }) => {
   );
   const canEditOrView = selectedItems.length === 1;
   const canDelete = selectedItems.length >= 1;
-  console.log(selectedItems);
   return (
     <>
       <Toast ref={toast} />
@@ -60,7 +59,6 @@ const List = ({ deleteFunction }) => {
         disabled={!canEditOrView}
         onClick={() => {
           let id = selectedItems[0].id;
-          console.log(id);
           navigate(`${id}/edit`);
           removeAllSelecetedItems();
         }}
@@ -73,7 +71,6 @@ const List = ({ deleteFunction }) => {
         disabled={!canEditOrView}
         onClick={() => {
           let id = selectedItems[0].id;
-          console.log(id);
           navigate(`${id}/detail`);
           removeAllSelecetedItems();
         }}

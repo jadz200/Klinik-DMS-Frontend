@@ -13,6 +13,11 @@ import DetailPatient from "@pages/Patient/DetailPatient";
 
 //Library Imports
 import { Routes, Route } from "react-router-dom";
+import Doctor from "./pages/Doctor/Doctor";
+import ListDoctor from "./pages/Doctor/ListDoctor";
+import EditDoctor from "./pages/Doctor/EditDoctor";
+import DetailDoctor from "./pages/Doctor/DetailDoctor";
+import CreateDoctor from "./pages/Doctor/CreateDoctor";
 
 function App() {
   // Login to show which page to show
@@ -52,6 +57,12 @@ function App() {
                   <Route path=":id/edit" element={<EditPatient />}></Route>
                   <Route path=":id/detail" element={<DetailPatient />}></Route>
                   <Route path="create" element={<CreatePatient />}></Route>
+                </Route>
+                <Route path="doctor" element={<Doctor />}>
+                  <Route index element={<ListDoctor />}></Route>
+                  <Route path=":id/edit" element={<EditDoctor />}></Route>
+                  <Route path=":id/detail" element={<DetailDoctor />}></Route>
+                  <Route path="create" element={<CreateDoctor />}></Route>
                 </Route>
               </Routes>
             </div>

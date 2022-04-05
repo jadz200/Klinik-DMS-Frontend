@@ -4,7 +4,7 @@ import { Button } from "primereact/button";
 import { NavLink } from "react-router-dom";
 
 //Icons / Images
-import { GiPerson } from "react-icons/gi";
+import { GiPerson, GiDoctorFace } from "react-icons/gi";
 import Logo from "@assets/images/Logo.png";
 
 // eslint-disable-next-line react/prop-types
@@ -14,6 +14,11 @@ const SideBar = ({ sideBar, setSideBar }) => {
       path: "/patient",
       text: "Patients",
       icon: <GiPerson />,
+    },
+    {
+      path: "/doctor",
+      text: "Doctors",
+      icon: <GiDoctorFace />,
     },
   ];
   return (

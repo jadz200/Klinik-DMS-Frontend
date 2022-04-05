@@ -14,13 +14,13 @@ export const usePatientData = (patientId) => {
       return data.data;
     },
     initialData: () => {
-      const hero = queryClient
+      const patient = queryClient
         .getQueryData("patients")
         ?.data?.find((patient) => patient.id === parseInt(patientId));
 
-      if (hero) {
+      if (patient) {
         return {
-          data: hero,
+          data: patient,
         };
       } else {
         return undefined;
