@@ -29,6 +29,7 @@ import CreateRoom from "./pages/Room/CreateRoom";
 import EditRoom from "./pages/Room/EditRoom";
 import ListRoom from "./pages/Room/ListRoom";
 import DetailRoom from "./pages/Room/DetailRoom";
+import Dashboard from "./pages/Dashboard/Dashboard";
 
 function App() {
   // Login to show which page to show
@@ -63,6 +64,7 @@ function App() {
             </div>
             <div className="main-content">
               <Routes>
+                <Route path="" element={<Dashboard />} />
                 <Route path="patient" element={<Patient />}>
                   <Route index element={<ListPatient />}></Route>
                   <Route path=":id/edit" element={<EditPatient />}></Route>

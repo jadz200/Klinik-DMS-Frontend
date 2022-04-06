@@ -5,83 +5,56 @@ import "@fullcalendar/core/vdom";
 import { Calendar } from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction"; // for selectable
+import { useAppointmentsData } from "../../hooks/Queries/useAppointmentsData";
+import { parseJSON } from "date-fns";
+import timeGridPlugin from "@fullcalendar/timegrid";
 
 const Appointment = () => {
+  const { data, isLoading, isError, Error } = useAppointmentsData();
+  console.log(data);
+  if (data) {
+    let date = parseJSON(data[0].date);
+    console.log(date.toISOString());
+    console.log(typeof date);
+  }
+  let formattedData = data?.map((app) => {
+    let date = parseJSON(app.date).toISOString();
+    let format = {
+      start: date,
+      title: app.reason,
+    };
+    return format;
+  });
+  console.log(formattedData);
+
   useEffect(() => {
-    var calendarEl = document.getElementById("calendar");
+    if (data) {
+      var calendarEl = document.getElementById("calendar");
 
-    var calendar = new Calendar(calendarEl, {
-      height: "100%",
-      plugins: [dayGridPlugin, interactionPlugin],
-      dateClick: (e) => {
-        console.log(e);
-      },
+      var calendar = new Calendar(calendarEl, {
+        height: "100%",
+        initialView: "dayGridMonth",
+        plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin],
+        headerToolbar: {
+          center: "dayGridMonth,timeGridWeek,timeGridDay",
+          end: "today prev,next",
+        },
+        dateClick: (e) => {
+          console.log(e);
+        },
 
-      events: [
-        {
-          title: "Long Event",
-          start: "2022-04-07",
-          end: "2022-04-08",
-        },
-        {
-          title: "All Day Event",
-          start: "2018-01-01",
-        },
-        {
-          title: "Long Event",
-          start: "2018-01-07",
-          end: "2018-01-10",
-        },
-        {
-          groupId: 999,
-          title: "Repeating Event",
-          start: "2018-01-09T16:00:00",
-        },
-        {
-          groupId: 999,
-          title: "Repeating Event",
-          start: "2018-01-16T16:00:00",
-        },
-        {
-          title: "Conference",
-          start: "2018-01-11",
-          end: "2018-01-13",
-        },
-        {
-          title: "Meeting",
-          start: "2018-01-12T10:30:00",
-          end: "2018-01-12T12:30:00",
-        },
-        {
-          title: "Lunch",
-          start: "2018-01-12T12:00:00",
-        },
-        {
-          title: "Meeting",
-          start: "2018-01-12T14:30:00",
-        },
-        {
-          title: "Happy Hour",
-          start: "2018-01-12T17:30:00",
-        },
-        {
-          title: "Dinner",
-          start: "2018-01-12T20:00:00",
-        },
-        {
-          title: "Birthday Party",
-          start: "2018-01-13T07:00:00",
-        },
-        {
-          title: "Click for Google",
-          url: "http://google.com/",
-          start: "2018-01-28",
-        },
-      ],
-    });
-    calendar.render();
-  }, []);
+        events: formattedData,
+      });
+      calendar.render();
+    }
+  }, [data?.length]);
 
+  if (isError) {
+    return <div>{Error.message}</div>;
+  }
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
   return (
     <>
       <ToolBar moduleName={"Appointment"} />

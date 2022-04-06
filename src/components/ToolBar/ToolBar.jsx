@@ -10,6 +10,7 @@ import List from "./List";
 import Create from "./Create";
 import Edit from "./Edit";
 import Detail from "./Detail";
+import CalendarActions from "./CalendarActions";
 
 const ToolBar = ({ moduleName, deleteFunction }) => {
   let [crudState, setCrudState] = useState("list");
@@ -55,17 +56,23 @@ const ToolBar = ({ moduleName, deleteFunction }) => {
         <div></div>
       )}
       <div className="elements-gap">
-        {crudState === "list" && (
-          <List navigate={navigate} deleteFunction={deleteFunction} />
-        )}
-        {crudState === "create" && (
-          <Create navigate={navigate} moduleName={moduleName} />
-        )}
-        {crudState === "edit" && (
-          <Edit navigate={navigate} moduleName={moduleName} />
-        )}
-        {crudState === "detail" && (
-          <Detail navigate={navigate} deleteFunction={deleteFunction} />
+        {moduleName !== "Appointment" ? (
+          <>
+            {crudState === "list" && (
+              <List navigate={navigate} deleteFunction={deleteFunction} />
+            )}
+            {crudState === "create" && (
+              <Create navigate={navigate} moduleName={moduleName} />
+            )}
+            {crudState === "edit" && (
+              <Edit navigate={navigate} moduleName={moduleName} />
+            )}
+            {crudState === "detail" && (
+              <Detail navigate={navigate} deleteFunction={deleteFunction} />
+            )}
+          </>
+        ) : (
+          <CalendarActions />
         )}
       </div>
     </div>

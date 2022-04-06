@@ -6,13 +6,18 @@ import { NavLink } from "react-router-dom";
 //Icons / Images
 import { GiPerson, GiDoctorFace } from "react-icons/gi";
 import { HiOutlineDesktopComputer } from "react-icons/hi";
-import { ImCalendar } from "react-icons/im";
+import { ImCalendar, ImStatsBars } from "react-icons/im";
 import { MdMeetingRoom } from "react-icons/md";
 import Logo from "@assets/images/Logo.png";
 
 // eslint-disable-next-line react/prop-types
 const SideBar = ({ sideBar, setSideBar }) => {
   const items = [
+    {
+      path: "/",
+      text: "Dashboard",
+      icon: <ImStatsBars />,
+    },
     {
       path: "/patient",
       text: "Patients",
