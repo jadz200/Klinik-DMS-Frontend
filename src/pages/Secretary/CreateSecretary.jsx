@@ -8,7 +8,7 @@ import { useAddSecretaryData } from "../../hooks/Queries/useSecretariesData";
 
 const CreateSecretary = () => {
   const navigate = useNavigate();
-  const { mutate: addDoctor } = useAddSecretaryData();
+  const { mutate: addSecretary } = useAddSecretaryData();
   const validationSchema = Yup.object({
     first_name: Yup.string().required("First Name is Required"),
     last_name: Yup.string().required("Last Name is Required"),
@@ -27,7 +27,7 @@ const CreateSecretary = () => {
     onSubmit: (values) => {
       let secretary = { ...values, clinicID: 1, roleID: 2 };
       console.log(secretary);
-      addDoctor(secretary);
+      addSecretary(secretary);
 
       navigate("/secretary");
     },

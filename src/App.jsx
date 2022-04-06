@@ -24,6 +24,11 @@ import EditSecretary from "./pages/Secretary/EditSecretary";
 import DetailSecretary from "./pages/Secretary/DetailSecretary";
 import CreateSecretary from "./pages/Secretary/CreateSecretary";
 import Appointment from "./pages/Appointment/Appointment";
+import Room from "./pages/Room/Room";
+import CreateRoom from "./pages/Room/CreateRoom";
+import EditRoom from "./pages/Room/EditRoom";
+import ListRoom from "./pages/Room/ListRoom";
+import DetailRoom from "./pages/Room/DetailRoom";
 
 function App() {
   // Login to show which page to show
@@ -80,6 +85,12 @@ function App() {
                   <Route path="create" element={<CreateSecretary />}></Route>
                 </Route>
                 <Route path="appointment" element={<Appointment />} />
+                <Route path="room" element={<Room />}>
+                  <Route index element={<ListRoom />}></Route>
+                  <Route path=":id/edit" element={<EditRoom />}></Route>
+                  <Route path=":id/detail" element={<DetailRoom />}></Route>
+                  <Route path="create" element={<CreateRoom />}></Route>
+                </Route>
               </Routes>
             </div>
           </div>

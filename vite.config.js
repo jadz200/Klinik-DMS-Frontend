@@ -6,6 +6,7 @@ const path = require("path");
 export default defineConfig({
   plugins: [react()],
   resolve: {
+    browser: true,
     alias: {
       "@": path.resolve(__dirname, "src"),
       "@components": path.resolve(__dirname, "src/components"),

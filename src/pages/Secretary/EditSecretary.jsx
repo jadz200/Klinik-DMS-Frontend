@@ -10,11 +10,10 @@ import { Card } from "primereact/card";
 
 const EditSecretary = () => {
   const { id } = useParams();
-  const { isLoading, data, error, isError, isPreviousData } =
-    useSecretaryData(id);
+  const { isLoading, data, error, isError } = useSecretaryData(id);
   console.log(data);
 
-  if (isLoading || isPreviousData) {
+  if (isLoading) {
     return <h2>Loading...</h2>;
   }
 

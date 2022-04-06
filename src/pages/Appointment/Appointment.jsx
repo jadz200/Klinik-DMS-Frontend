@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
+
+import ToolBar from "../../components/ToolBar/ToolBar";
+import "@fullcalendar/core/vdom";
 import { Calendar } from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid";
-import ToolBar from "../../components/ToolBar/ToolBar";
+import interactionPlugin from "@fullcalendar/interaction"; // for selectable
 
 const Appointment = () => {
   useEffect(() => {
@@ -9,7 +12,10 @@ const Appointment = () => {
 
     var calendar = new Calendar(calendarEl, {
       height: "100%",
-      plugins: [dayGridPlugin],
+      plugins: [dayGridPlugin, interactionPlugin],
+      dateClick: (e) => {
+        console.log(e);
+      },
 
       events: [
         {
@@ -78,7 +84,7 @@ const Appointment = () => {
 
   return (
     <>
-      <ToolBar moduleName={"Secretary"} />
+      <ToolBar moduleName={"Appointment"} />
       {/* Add Delete Function to ToolBar */}
       <div className="px-3 py-3 " style={{ height: "calc(100vh - 8rem)" }}>
         <div id="calendar"></div>
