@@ -4,6 +4,11 @@ const path = require("path");
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  root: "./",
+  build: {
+    outDir: "dist",
+  },
+  publicDir: "public",
   plugins: [react()],
   resolve: {
     browser: true,
