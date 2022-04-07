@@ -55,7 +55,7 @@ const Appointment = () => {
       });
       calendar.render();
     }
-  }, [appointment?.length]);
+  }, [JSON.stringify(appointment)]);
 
   if (isError) {
     return <div>{Error.message}</div>;

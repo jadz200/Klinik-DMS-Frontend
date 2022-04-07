@@ -4,7 +4,7 @@ import { baseURL } from "../../utils/baseURL";
 
 const fetchAppointment = ({ queryKey }) => {
   const appointmentId = queryKey[1];
-  return axios.get(`${baseURL}/appointnment/${appointmentId}`);
+  return axios.get(`${baseURL}/appointment/${appointmentId}`);
 };
 
 export const useAppointmentData = (appointmentId) => {
