@@ -86,7 +86,9 @@ function App() {
                   ></Route>
                   <Route path="create" element={<CreateSecretary />}></Route>
                 </Route>
-                <Route path="appointment" element={<Appointment />} />
+                <Route path="appointment" element={<Appointment />}>
+                  <Route path=":id" />
+                </Route>
                 <Route path="room" element={<Room />}>
                   <Route index element={<ListRoom />}></Route>
                   <Route path=":id/edit" element={<EditRoom />}></Route>

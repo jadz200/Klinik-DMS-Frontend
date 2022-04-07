@@ -12,7 +12,7 @@ import Edit from "./Edit";
 import Detail from "./Detail";
 import CalendarActions from "./CalendarActions";
 
-const ToolBar = ({ moduleName, deleteFunction }) => {
+const ToolBar = ({ moduleName, deleteFunction, setDialog }) => {
   let [crudState, setCrudState] = useState("list");
   let navigate = useNavigate();
   let location = useLocation();
@@ -42,7 +42,7 @@ const ToolBar = ({ moduleName, deleteFunction }) => {
 
   return (
     <div className="header-main-content bg-white h-4rem pr-4 pl-1 py-2 flex justify-content-between align-items-center sticky top-0">
-      {crudState !== "read" ? (
+      {crudState !== "list" ? (
         <div>
           <Button
             icon="pi pi-angle-left text-2xl"
@@ -72,7 +72,7 @@ const ToolBar = ({ moduleName, deleteFunction }) => {
             )}
           </>
         ) : (
-          <CalendarActions />
+          <CalendarActions setDialog={setDialog} />
         )}
       </div>
     </div>
