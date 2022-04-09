@@ -58,21 +58,29 @@ const ListSecretary = () => {
         autoLayout={true}
       >
         <Column selectionMode="multiple" style={{ width: "5%" }}></Column>
-        <Column field="id" header="ID" style={{ width: "5%" }}></Column>
+        <Column
+          field="id"
+          header="ID"
+          style={{ width: "5%" }}
+          sortable
+        ></Column>
         <Column
           field="first_name"
           header="First Name"
           style={{ width: "20%" }}
+          sortable
         ></Column>
         <Column
           field="last_name"
           header="Last Name"
           style={{ width: "20%" }}
+          sortable
         ></Column>
         <Column
           field="phone"
           header="Phone Number"
           style={{ width: "20%" }}
+          sortable
         ></Column>
         <Column
           field="mail"
@@ -80,6 +88,7 @@ const ListSecretary = () => {
           style={{
             width: "30%",
           }}
+          sortable
         ></Column>
       </DataTable>
     </>

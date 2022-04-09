@@ -47,16 +47,23 @@ const ListRoom = () => {
         autoLayout={true}
       >
         <Column selectionMode="multiple" style={{ width: "10%" }}></Column>
-        <Column field="id" header="ID" style={{ width: "10%" }}></Column>
+        <Column
+          field="id"
+          header="ID"
+          style={{ width: "10%" }}
+          sortable
+        ></Column>
         <Column
           field="clinicID"
           header="Clinic ID"
           style={{ width: "10%" }}
+          sortable
         ></Column>
         <Column
           field="title"
           header="Room Name"
           style={{ width: "70%" }}
+          sortable
         ></Column>
       </DataTable>
     </>
