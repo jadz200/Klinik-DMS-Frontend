@@ -30,11 +30,11 @@ const ListRoom = () => {
             room.id
               .toString()
               .toLocaleLowerCase()
-              .startsWith(filter.toLocaleLowerCase()) ||
+              .includes(filter.toLocaleLowerCase()) ||
             room.title
               .toString()
               .toLocaleLowerCase()
-              .startsWith(filter.toLocaleLowerCase())
+              .includes(filter.toLocaleLowerCase())
         )}
         dataKey="id"
         responsiveLayout="scroll"
@@ -47,16 +47,16 @@ const ListRoom = () => {
         autoLayout={true}
       >
         <Column selectionMode="multiple" style={{ width: "10%" }}></Column>
-        <Column field="id" header="ID" style={{ width: "30%" }}></Column>
+        <Column field="id" header="ID" style={{ width: "10%" }}></Column>
         <Column
           field="clinicID"
           header="Clinic ID"
-          style={{ width: "30%" }}
+          style={{ width: "10%" }}
         ></Column>
         <Column
           field="title"
           header="Room Name"
-          style={{ width: "30%" }}
+          style={{ width: "70%" }}
         ></Column>
       </DataTable>
     </>

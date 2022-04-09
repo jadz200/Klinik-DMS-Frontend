@@ -30,24 +30,24 @@ const ListPatient = () => {
           (patient) =>
             patient.first_name
               .toLocaleLowerCase()
-              .startsWith(filter.toLocaleLowerCase()) ||
+              .includes(filter.toLocaleLowerCase()) ||
             patient.id
               .toString()
               .toLocaleLowerCase()
-              .startsWith(filter.toLocaleLowerCase()) ||
+              .includes(filter.toLocaleLowerCase()) ||
             patient.last_name
               .toLocaleLowerCase()
-              .startsWith(filter.toLocaleLowerCase()) ||
+              .includes(filter.toLocaleLowerCase()) ||
             patient.address
               .toLocaleLowerCase()
-              .startsWith(filter.toLocaleLowerCase()) ||
+              .includes(filter.toLocaleLowerCase()) ||
             patient.mail
               .toLocaleLowerCase()
-              .startsWith(filter.toLocaleLowerCase()) ||
+              .includes(filter.toLocaleLowerCase()) ||
             patient.phone
               .toString()
               .toLocaleLowerCase()
-              .startsWith(filter.toLocaleLowerCase())
+              .includes(filter.toLocaleLowerCase())
         )}
         dataKey="id"
         responsiveLayout="scroll"
@@ -59,35 +59,34 @@ const ListPatient = () => {
         rowsPerPageOptions={[10, 20, 50]}
         autoLayout={true}
       >
-        <Column selectionMode="multiple" style={{ width: "10%" }}></Column>
-        <Column field="id" header="ID" style={{ width: "10%" }}></Column>
+        <Column selectionMode="multiple" style={{ width: "5%" }}></Column>
+        <Column field="id" header="ID" style={{ width: "5%" }}></Column>
         <Column
           field="first_name"
           header="First Name"
-          style={{ width: "10%" }}
+          style={{ width: "15%" }}
         ></Column>
         <Column
           field="last_name"
           header="Last Name"
-          style={{ width: "10%" }}
+          style={{ width: "15%" }}
         ></Column>
         <Column
           field="phone"
           header="Phone Number"
-          style={{ width: "10%" }}
+          style={{ width: "15%" }}
         ></Column>
         <Column
           field="mail"
           header="Email"
           style={{
-            width: "10%",
-            overflow: "hidden",
+            width: "20%",
           }}
         ></Column>
         <Column
           field="address"
           header="Address"
-          style={{ width: "10%" }}
+          style={{ width: "25%" }}
         ></Column>
       </DataTable>
     </>

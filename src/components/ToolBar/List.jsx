@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import { Button } from "primereact/button";
-import { InputText } from "primereact/inputtext";
 import { useNavigate } from "react-router-dom";
 import { useStore } from "../../hooks/Store/useStore";
 import { confirmDialog } from "primereact/confirmdialog";
@@ -30,8 +29,6 @@ const List = ({ deleteFunction }) => {
     });
   };
   let navigate = useNavigate();
-  let setFilter = useStore((state) => state.setFilter);
-  let filter = useStore((state) => state.filter);
   let selectedItems = useStore((state) => state.selectedItems);
   let removeAllSelecetedItems = useStore(
     (state) => state.removeAllSelecetedItems
@@ -83,16 +80,6 @@ const List = ({ deleteFunction }) => {
         disabled={!canDelete}
         onClick={confirmDelete}
       />
-
-      <span className="p-input-icon-left">
-        <i className="pi pi-search" />
-        <InputText
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-          placeholder="Search"
-          className="p-inputtext-sm"
-        />
-      </span>
     </>
   );
 };

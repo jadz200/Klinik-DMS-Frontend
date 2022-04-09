@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 //Library Imports
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "primereact/button";
+import { useStore } from "../../hooks/Store/useStore";
+import { InputText } from "primereact/inputtext";
 
 //Component Imports
 import List from "./List";
@@ -26,6 +28,9 @@ const ToolBar = ({ moduleName, deleteFunction, setDialog }) => {
   // } else {
   //   prefix = "";
   // }
+
+  let setFilter = useStore((state) => state.setFilter);
+  let filter = useStore((state) => state.filter);
 
   useEffect(() => {
     const path = location.pathname;
@@ -53,7 +58,17 @@ const ToolBar = ({ moduleName, deleteFunction, setDialog }) => {
           />
         </div>
       ) : (
-        <div></div>
+        <div className="ml-3">
+          <span className="p-input-icon-left">
+            <i className="pi pi-search" />
+            <InputText
+              value={filter}
+              onChange={(e) => setFilter(e.target.value)}
+              placeholder="Search"
+              className="p-inputtext-sm"
+            />
+          </span>
+        </div>
       )}
       <div className="elements-gap">
         {moduleName !== "Appointment" ? (

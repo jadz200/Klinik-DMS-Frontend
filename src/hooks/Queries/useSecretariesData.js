@@ -64,7 +64,7 @@ export const useEditSecretaryData = () => {
       queryClient.invalidateQueries("secretaries");
     },
     onError: (err) => {
-      console.log(err);
+      console.log(err.response);
     },
   });
 };

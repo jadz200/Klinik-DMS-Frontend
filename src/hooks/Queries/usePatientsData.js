@@ -40,7 +40,7 @@ export const useAddPatientData = () => {
       queryClient.invalidateQueries("patients");
     },
     onError: (err) => {
-      console.log(err);
+      console.log(err.response);
     },
   });
 };
