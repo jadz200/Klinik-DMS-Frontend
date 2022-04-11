@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 //Library imports
 import { Outlet } from "react-router-dom";
 
 //Component imports
 import ToolBar from "../../components/ToolBar/ToolBar";
 import { useDeletePatientData } from "../../hooks/Queries/usePatientsData";
+import { useStore } from "../../hooks/Store/useStore";
 
 const Patient = () => {
   const { mutate: deletePatient } = useDeletePatientData();
+  const resetEverything = useStore((state) => state.resetEverything);
+
+  useEffect(() => {
+    resetEverything();
+  }, []);
 
   return (
     <>

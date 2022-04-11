@@ -6,4 +6,11 @@ export const useStore = create((set) => ({
   selectedItems: [],
   setSelectedItems: (newItems) => set({ selectedItems: newItems }),
   removeAllSelecetedItems: () => set({ selectedItems: [] }),
+  //Resets All Store items
+  resetEverything: () => {
+    set({
+      selectedItems: [],
+      filter: "",
+    });
+  },
 }));

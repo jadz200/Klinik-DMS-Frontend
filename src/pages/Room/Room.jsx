@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDeleteRoomData } from "../../hooks/Queries/useRoomsData";
 import ToolBar from "../../components/ToolBar/ToolBar";
 import { Outlet } from "react-router-dom";
+import { useStore } from "../../hooks/Store/useStore";
 
 const Room = () => {
   const { mutate: deleteRoom } = useDeleteRoomData();
+  const resetEverything = useStore((state) => state.resetEverything);
+
+  useEffect(() => {
+    resetEverything();
+  }, []);
   return (
     <>
       <ToolBar moduleName={"Room"} deleteFunction={deleteRoom} />
