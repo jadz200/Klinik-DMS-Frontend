@@ -6,6 +6,11 @@ const fetchVisits = () => {
   return axios.get(`${baseURL}/visit`);
 };
 
+const fetchPatientVisits = ({ queryKey }) => {
+  const patientId = queryKey[1];
+  return axios.get(`${baseURL}/patient/${patientId}/visits`);
+};
+
 const addVisit = (visit) => {
   console.log(visit);
   return axios.post(`${baseURL}/visit/create/`, visit);
@@ -24,6 +29,15 @@ export const useVisitsData = (onSuccess, onError) => {
     refetchOnWindowFocus: true,
     onSuccess,
     onError,
+    select: (data) => {
+      return data.data;
+    },
+  });
+};
+
+export const usePatientVisitsData = (patientId) => {
+  return useQuery(["patientVisits", patientId], fetchPatientVisits, {
+    refetchOnWindowFocus: true,
     select: (data) => {
       return data.data;
     },

@@ -118,9 +118,6 @@ const ListPatient = () => {
           header="Actions"
           body={actionButtonsTemplate}
           style={{ width: "15%" }}
-          onClick={(e) => {
-            console.log(e);
-          }}
         ></Column>
       </DataTable>
     </>

@@ -31,6 +31,7 @@ import ListRoom from "./pages/Room/ListRoom";
 import DetailRoom from "./pages/Room/DetailRoom";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import CreateVisit from "./pages/Visit/CreateVisit";
+import EditVisit from "./pages/Visit/EditVisit";
 
 function App() {
   // Login to show which page to show
@@ -74,6 +75,11 @@ function App() {
                     path=":id/visit/create"
                     element={<CreateVisit />}
                   ></Route>
+                  <Route
+                    path=":id/detail/visit/:visitID/edit"
+                    element={<EditVisit />}
+                  />
+
                   <Route path="create" element={<CreatePatient />}></Route>
                 </Route>
                 <Route path="doctor" element={<Doctor />}>

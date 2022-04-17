@@ -4,10 +4,10 @@ import { baseURL } from "../../utils/baseURL";
 
 const fetchVisit = ({ queryKey }) => {
   const visitId = queryKey[1];
-  return axios.get(`${baseURL}/user/${visitId}`);
+  return axios.get(`${baseURL}/visit/${visitId}`);
 };
 
-export const useSecretaryData = (visitId) => {
+export const useVisitData = (visitId) => {
   const queryClient = useQueryClient();
   return useQuery(["visit", visitId], fetchVisit, {
     select: (data) => {
