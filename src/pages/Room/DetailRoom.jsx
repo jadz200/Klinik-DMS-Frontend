@@ -1,3 +1,4 @@
+import { Card } from "primereact/card";
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useRoomData } from "../../hooks/Queries/useRoomData";
@@ -14,7 +15,14 @@ const DetailRoom = () => {
     return <h2>{error.message}</h2>;
   }
 
-  return <div>{JSON.stringify(data)}</div>;
+  return (
+    <Card>
+      <div className="flex align-items-center align-content-center mb-4">
+        <h3 className="underline">Title:</h3>
+        <p className="text-xl ml-4">{data.title}</p>
+      </div>
+    </Card>
+  );
 };
 
 export default DetailRoom;

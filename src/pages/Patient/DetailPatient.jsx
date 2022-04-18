@@ -130,7 +130,6 @@ const DetailPatient = () => {
           ></Column>
         </DataTable>
       </TabPanel>
-      <TabPanel header="Payment Journals">Content III</TabPanel>
     </TabView>
   );
 };
