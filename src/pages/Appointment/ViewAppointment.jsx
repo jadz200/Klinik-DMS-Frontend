@@ -5,7 +5,7 @@ import { useDoctorData } from "../../hooks/Queries/useDoctorData";
 import { usePatientData } from "../../hooks/Queries/usePatientData";
 import { useRoomData } from "../../hooks/Queries/useRoomData";
 
-const ViewAppointment = ({ appointment, id }) => {
+const ViewAppointment = ({ appointment }) => {
   const {
     data: patient,
     isLoading: patientIsLoading,
