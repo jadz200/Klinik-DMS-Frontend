@@ -92,15 +92,9 @@ const DetailPatient = () => {
         <DataTable value={visits} dataKey="id">
           <Column
             sortable
-            field="id"
-            header="ID"
-            style={{ width: "5%" }}
-          ></Column>
-          <Column
-            sortable
             field="comments"
             header="Comments"
-            style={{ width: "25%" }}
+            style={{ width: "40%" }}
           ></Column>
           <Column
             sortable
@@ -123,7 +117,7 @@ const DetailPatient = () => {
           <Column
             header="Actions"
             body={actionButtonsTemplate}
-            style={{ width: "30%" }}
+            style={{ width: "20%" }}
             onClick={(e) => {
               console.log(e);
             }}
