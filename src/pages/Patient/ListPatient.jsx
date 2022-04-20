@@ -78,20 +78,20 @@ const ListPatient = () => {
         <Column selectionMode="multiple" style={{ width: "5%" }}></Column>
         <Column
           field="id"
-          header="ID"
-          style={{ width: "5%" }}
+          header="Patient ID"
+          style={{ width: "13%" }}
           sortable
         ></Column>
         <Column
           field="first_name"
           header="First Name"
-          style={{ width: "15%" }}
+          style={{ width: "12%" }}
           sortable
         ></Column>
         <Column
           field="last_name"
           header="Last Name"
-          style={{ width: "15%" }}
+          style={{ width: "13%" }}
           sortable
         ></Column>
         <Column
@@ -111,7 +111,7 @@ const ListPatient = () => {
         <Column
           field="address"
           header="Address"
-          style={{ width: "15%" }}
+          style={{ width: "12%" }}
           sortable
         ></Column>
         <Column

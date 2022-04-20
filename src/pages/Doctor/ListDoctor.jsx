@@ -60,14 +60,14 @@ const ListDoctor = () => {
         <Column selectionMode="multiple" style={{ width: "5%" }}></Column>
         <Column
           field="id"
-          header="ID"
-          style={{ width: "5%" }}
+          header="Staff ID"
+          style={{ width: "10%" }}
           sortable
         ></Column>
         <Column
           field="first_name"
           header="First Name"
-          style={{ width: "20%" }}
+          style={{ width: "15%" }}
           sortable
         ></Column>
         <Column

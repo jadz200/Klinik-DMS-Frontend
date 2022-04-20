@@ -10,6 +10,10 @@ const ListRoom = () => {
   let filter = useStore((state) => state.filter);
   const { isLoading, data: rooms, isError, error } = useRoomsData();
 
+  const Clinic = () => {
+    return <div>AUBMC</div>;
+  };
+
   if (isLoading) {
     return <h2>Loading...</h2>;
   }
@@ -17,6 +21,7 @@ const ListRoom = () => {
   if (isError) {
     return <h2>{error.message}</h2>;
   }
+
   return (
     <>
       <DataTable
@@ -54,15 +59,15 @@ const ListRoom = () => {
           sortable
         ></Column>
         <Column
-          field="clinicID"
-          header="Clinic ID"
-          style={{ width: "10%" }}
+          body={Clinic}
+          header="Clinic Name"
+          style={{ width: "15%" }}
           sortable
         ></Column>
         <Column
           field="title"
           header="Room Name"
-          style={{ width: "70%" }}
+          style={{ width: "65%" }}
           sortable
         ></Column>
       </DataTable>
