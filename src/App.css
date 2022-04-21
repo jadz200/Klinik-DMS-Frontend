@@ -109,7 +109,43 @@ a {
 .p-button.p-button-sm .p-button-icon {
   font-size: 1rem !important;
 }
+.Wrapper{
+  height: 200px;
+  width: 70%;
+  display: grid;
+  grid-template-columns: 30% 70%;
+  grid-column-gap: 1em;
+}
+.Wrapper> * {
+  background: rgb(240, 239, 239);
+  padding: 1em;
 
+}
+.Box1{
+  position: relative;
+}
+.Box2{
+  display: grid;
+  grid-template-columns: 1fr 1fr ;
+}
+
+.Circle{
+  position:absolute;
+  height: 80px;
+  width: 80px;
+  background-color: #bbb;
+  border-radius: 50%;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+}
+.mail{
+  position:absolute;
+  top:60%;
+  left:50%;
+  transform: translate(-50%, -50%);
+}
 .p-datatable-scrollable .p-datatable-thead > tr > th,
 .p-datatable-scrollable .p-datatable-tbody > tr > td,
 .p-datatable-scrollable .p-datatable-tfoot > tr > td {
