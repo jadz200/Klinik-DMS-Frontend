@@ -67,10 +67,16 @@ const DetailPatient = () => {
       onTabChange={(e) => setActiveIndex(e.index)}
     >
       <TabPanel header="Details">
-        <div className="flex align-items-center align-content-center mb-4">
+
+        <div className="Wrapper">
+          <div  className="Box1">
+             <div className="Profile"><div className="Circle"></div> </div>
+             <div className="mail"><p className="text-xl ml-3">{patient.mail}</p></div>
+          </div>
+          <div className="Box2"><div className="flex align-items-center align-content-center mb-4">
           <h3 className="underline">First Name:</h3>
           <p className="text-xl ml-4">{patient.first_name}</p>
-        </div>
+        </div> 
         <div className="flex align-items-center align-content-center mb-4">
           <h3 className="underline">Last Name:</h3>
           <p className="text-xl ml-4">{patient.last_name}</p>
@@ -80,13 +86,13 @@ const DetailPatient = () => {
           <p className="text-xl ml-4">{patient.phone}</p>
         </div>
         <div className="flex align-items-center align-content-center mb-4">
-          <h3 className="underline">Email:</h3>
-          <p className="text-xl ml-4">{patient.mail}</p>
-        </div>
-        <div className="flex align-items-center align-content-center mb-4">
           <h3 className="underline">Address Name:</h3>
           <p className="text-xl ml-4">{patient.address}</p>
         </div>
+        </div>
+
+        </div>
+        
       </TabPanel>
       <TabPanel header="Visits">
         <DataTable value={visits} dataKey="id">
