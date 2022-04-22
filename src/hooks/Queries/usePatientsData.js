@@ -4,9 +4,10 @@ import axios from "axios";
 
 //Variable imports
 import { baseURL } from "../../utils/baseURL";
-import { useStore } from "../Store/useStore";
 
-const user = useStore.getState().authTokens?.access;
+let user = localStorage.getItem("authTokens")
+  ? JSON.parse(localStorage.getItem("authTokens")).access
+  : null;
 
 const config = {
   headers: { Authorization: `Bearer ${user}` },
