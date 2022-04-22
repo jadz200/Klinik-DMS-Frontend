@@ -18,6 +18,8 @@ const ListDoctor = () => {
     return <h2>{error.message}</h2>;
   }
 
+  console.log(doctors);
+
   return (
     <>
       <DataTable
@@ -39,7 +41,7 @@ const ListDoctor = () => {
               doctor.last_name
                 .toLocaleLowerCase()
                 .includes(filter.toLocaleLowerCase()) ||
-              doctor.mail
+              doctor.email
                 .toLocaleLowerCase()
                 .includes(filter.toLocaleLowerCase()) ||
               doctor.phone
@@ -83,7 +85,7 @@ const ListDoctor = () => {
           sortable
         ></Column>
         <Column
-          field="mail"
+          field="email"
           header="Email"
           style={{
             width: "30%",

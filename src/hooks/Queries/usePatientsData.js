@@ -4,22 +4,29 @@ import axios from "axios";
 
 //Variable imports
 import { baseURL } from "../../utils/baseURL";
+import { useStore } from "../Store/useStore";
+
+const user = useStore.getState().authTokens.access;
+
+const config = {
+  headers: { Authorization: `Bearer ${user}` },
+};
 
 //Fetcher Function
 const fetchSuperHeroes = () => {
-  return axios.get(`${baseURL}/patient`);
+  return axios.get(`${baseURL}/patient`, config);
 };
 
 const addPatient = (patient) => {
-  return axios.post(`${baseURL}/patient/create/`, patient);
+  return axios.post(`${baseURL}/patient/create/`, patient, config);
 };
 
 const deletePatient = (id) => {
-  return axios.delete(`${baseURL}/patient/${id}/delete`);
+  return axios.delete(`${baseURL}/patient/${id}/delete`, config);
 };
 
 const editPatient = (patient) => {
-  return axios.put(`${baseURL}/patient/${patient.id}/update/`, patient);
+  return axios.put(`${baseURL}/patient/${patient.id}/update/`, patient, config);
 };
 
 export const usePatientsData = (onSuccess, onError) => {

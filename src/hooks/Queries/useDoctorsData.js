@@ -4,15 +4,22 @@ import axios from "axios";
 
 //Variable imports
 import { baseURL } from "../../utils/baseURL";
+import { useStore } from "../Store/useStore";
+
+const user = useStore.getState().authTokens.access;
+
+const config = {
+  headers: { Authorization: `Bearer ${user}` },
+};
 
 //Fetcher Function
 const fetchDoctors = () => {
-  return axios.get(`${baseURL}/user`);
+  return axios.get(`${baseURL}/user`, config);
 };
 
 const addDoctor = (doctor) => {
   console.log(doctor);
-  return axios.post(`${baseURL}/user/create/`, doctor);
+  return axios.post(`${baseURL}/user/create/`, doctor, config);
 };
 
 const deleteDoctor = (id) => {

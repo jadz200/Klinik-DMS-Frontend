@@ -10,6 +10,7 @@ import EditPatient from "@pages/Patient/EditPatient";
 import CreatePatient from "@pages/Patient/CreatePatient";
 import Patient from "@pages/Patient/Patient";
 import DetailPatient from "@pages/Patient/DetailPatient";
+import RequireAuth from "./utils/RequireAuth";
 
 //Library Imports
 import { Routes, Route } from "react-router-dom";
@@ -34,7 +35,7 @@ import EditVisit from "./pages/Visit/EditVisit";
 
 function App() {
   // Login to show which page to show
-  const [login, setLogin] = useState(false);
+  const [login, setLogin] = useState(true);
   useLayoutEffect(() => {
     console.log(localStorage.getItem("visited"));
     if (localStorage.getItem("visited")) {
@@ -65,7 +66,15 @@ function App() {
             </div>
             <div className="main-content">
               <Routes>
-                <Route path="patient" element={<Patient />}>
+                <Route path="login" element={<Login />} />
+                <Route
+                  path="patient"
+                  element={
+                    <RequireAuth>
+                      <Patient />
+                    </RequireAuth>
+                  }
+                >
                   <Route index element={<ListPatient />}></Route>
                   <Route path=":id/edit" element={<EditPatient />}></Route>
                   <Route path=":id/detail" element={<DetailPatient />}></Route>

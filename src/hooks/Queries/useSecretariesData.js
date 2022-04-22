@@ -4,10 +4,17 @@ import axios from "axios";
 
 //Variable imports
 import { baseURL } from "../../utils/baseURL";
+import { useStore } from "../Store/useStore";
+
+const user = useStore.getState().authTokens.access;
+
+const config = {
+  headers: { Authorization: `Bearer ${user}` },
+};
 
 //Fetcher Function
 const fetchSecretaries = () => {
-  return axios.get(`${baseURL}/user`);
+  return axios.get(`${baseURL}/user`, config);
 };
 
 const addSectretary = (secretary) => {

@@ -2,9 +2,17 @@ import { useQuery, useQueryClient } from "react-query";
 import axios from "axios";
 import { baseURL } from "../../utils/baseURL";
 
+import { useStore } from "../Store/useStore";
+
+const user = useStore.getState().authTokens.access;
+
+const config = {
+  headers: { Authorization: `Bearer ${user}` },
+};
+
 const fetchPatient = ({ queryKey }) => {
   const patientId = queryKey[1];
-  return axios.get(`${baseURL}/patient/${patientId}`);
+  return axios.get(`${baseURL}/patient/${patientId}`, config);
 };
 
 export const usePatientData = (patientId) => {

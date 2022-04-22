@@ -1,11 +1,18 @@
 import React, { useRef } from "react";
 import { Button } from "primereact/button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useStore } from "../../hooks/Store/useStore";
 import { confirmDialog } from "primereact/confirmdialog";
 import { Toast } from "primereact/toast";
 
 const List = ({ deleteFunction }) => {
+  const location = useLocation();
+
+  const showCUD =
+    location.pathname.includes("doctor") ||
+    location.pathname.includes("secretary");
+  console.log(showCUD);
+
   const toast = useRef(null);
   const accept = () => {
     toast.current.show({
@@ -38,28 +45,32 @@ const List = ({ deleteFunction }) => {
   return (
     <>
       <Toast ref={toast} />
-      <Button
-        label="Create"
-        icon="pi pi-check"
-        iconPos="right"
-        className="p-button-sm p-button-success"
-        onClick={() => {
-          navigate("create");
-          removeAllSelecetedItems();
-        }}
-      />
-      <Button
-        label="Edit"
-        icon="pi pi-pencil"
-        iconPos="right"
-        className="p-button-sm p-button-warning"
-        disabled={!canEditOrView}
-        onClick={() => {
-          let id = selectedItems[0].id;
-          navigate(`${id}/edit`);
-          removeAllSelecetedItems();
-        }}
-      />
+      {!showCUD && (
+        <Button
+          label="Create"
+          icon="pi pi-check"
+          iconPos="right"
+          className="p-button-sm p-button-success"
+          onClick={() => {
+            navigate("create");
+            removeAllSelecetedItems();
+          }}
+        />
+      )}
+      {!showCUD && (
+        <Button
+          label="Edit"
+          icon="pi pi-pencil"
+          iconPos="right"
+          className="p-button-sm p-button-warning"
+          disabled={!canEditOrView}
+          onClick={() => {
+            let id = selectedItems[0].id;
+            navigate(`${id}/edit`);
+            removeAllSelecetedItems();
+          }}
+        />
+      )}
       <Button
         label="View"
         icon="pi pi-eye"
@@ -72,14 +83,16 @@ const List = ({ deleteFunction }) => {
           removeAllSelecetedItems();
         }}
       />
-      <Button
-        label="Delete"
-        icon="pi pi-trash"
-        iconPos="right"
-        className="p-button-sm p-button-danger"
-        disabled={!canDelete}
-        onClick={confirmDelete}
-      />
+      {!showCUD && (
+        <Button
+          label="Delete"
+          icon="pi pi-trash"
+          iconPos="right"
+          className="p-button-sm p-button-danger"
+          disabled={!canDelete}
+          onClick={confirmDelete}
+        />
+      )}
     </>
   );
 };
