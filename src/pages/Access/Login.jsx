@@ -13,18 +13,6 @@ import Logo from "@assets/images/Logo.png";
 import axios from "axios";
 
 const Login = () => {
-  console.log(
-    localStorage.getItem("authTokens")
-      ? JSON.parse(localStorage.getItem("authTokens"))
-      : null
-  );
-
-  console.log(
-    localStorage.getItem("authTokens")
-      ? jwt_decode(JSON.parse(localStorage.getItem("authTokens")).access)
-      : null
-  );
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const setUser = useStore((state) => state.setUser);
@@ -41,8 +29,6 @@ const Login = () => {
         password,
       })
       .then((resp) => {
-        console.log(resp.data);
-        console.log(jwt_decode(resp.data.access));
         setAuthTokens(resp.data);
         setUser(jwt_decode(resp.data.access));
         localStorage.setItem("authTokens", JSON.stringify(resp.data));
