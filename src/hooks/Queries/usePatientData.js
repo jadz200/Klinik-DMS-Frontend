@@ -4,7 +4,7 @@ import { baseURL } from "../../utils/baseURL";
 
 import { useStore } from "../Store/useStore";
 
-const user = useStore.getState().authTokens.access;
+const user = useStore.getState().authTokens?.access;
 
 const config = {
   headers: { Authorization: `Bearer ${user}` },
