@@ -9,7 +9,10 @@ import { useStore } from "../Store/useStore";
 let user = useStore.getState().authTokens?.access;
 const unsub2 = useStore.subscribe(
   (state) => state.authTokens,
-  (arg) => (user = arg.authTokens?.access)
+  (arg) => {
+    user = arg.authTokens?.access;
+    console.log(user);
+  }
 );
 
 const config = {
