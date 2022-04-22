@@ -89,13 +89,27 @@ function App() {
 
                   <Route path="create" element={<CreatePatient />}></Route>
                 </Route>
-                <Route path="doctor" element={<Doctor />}>
+                <Route
+                  path="doctor"
+                  element={
+                    <RequireAuth>
+                      <Doctor />
+                    </RequireAuth>
+                  }
+                >
                   <Route index element={<ListDoctor />}></Route>
                   <Route path=":id/edit" element={<EditDoctor />}></Route>
                   <Route path=":id/detail" element={<DetailDoctor />}></Route>
                   <Route path="create" element={<CreateDoctor />}></Route>
                 </Route>
-                <Route path="secretary" element={<Secretary />}>
+                <Route
+                  path="secretary"
+                  element={
+                    <RequireAuth>
+                      <Secretary />
+                    </RequireAuth>
+                  }
+                >
                   <Route index element={<ListSecretary />}></Route>
                   <Route path=":id/edit" element={<EditSecretary />}></Route>
                   <Route
@@ -107,7 +121,14 @@ function App() {
                 <Route path="appointment" element={<Appointment />}>
                   <Route path=":id" />
                 </Route>
-                <Route path="room" element={<Room />}>
+                <Route
+                  path="room"
+                  element={
+                    <RequireAuth>
+                      <Room />
+                    </RequireAuth>
+                  }
+                >
                   <Route index element={<ListRoom />}></Route>
                   <Route path=":id/edit" element={<EditRoom />}></Route>
                   <Route path=":id/detail" element={<DetailRoom />}></Route>

@@ -5,22 +5,14 @@ import axios from "axios";
 //Variable imports
 import { baseURL } from "../../utils/baseURL";
 
-let user = localStorage.getItem("authTokens")
-  ? JSON.parse(localStorage.getItem("authTokens")).access
-  : null;
-
-const config = {
-  headers: { Authorization: `Bearer ${user}` },
-};
-
 //Fetcher Function
 const fetchDoctors = () => {
-  return axios.get(`${baseURL}/user`, config);
+  return axios.get(`${baseURL}/user`);
 };
 
 const addDoctor = (doctor) => {
   console.log(doctor);
-  return axios.post(`${baseURL}/user/create/`, doctor, config);
+  return axios.post(`${baseURL}/user/create/`, doctor);
 };
 
 const deleteDoctor = (id) => {

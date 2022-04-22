@@ -5,29 +5,21 @@ import axios from "axios";
 //Variable imports
 import { baseURL } from "../../utils/baseURL";
 
-let user = localStorage.getItem("authTokens")
-  ? JSON.parse(localStorage.getItem("authTokens")).access
-  : null;
-
-const config = {
-  headers: { Authorization: `Bearer ${user}` },
-};
-
 //Fetcher Function
 const fetchSuperHeroes = () => {
-  return axios.get(`${baseURL}/patient`, config);
+  return axios.get(`${baseURL}/patient`);
 };
 
 const addPatient = (patient) => {
-  return axios.post(`${baseURL}/patient/create/`, patient, config);
+  return axios.post(`${baseURL}/patient/create/`, patient);
 };
 
 const deletePatient = (id) => {
-  return axios.delete(`${baseURL}/patient/${id}/delete`, config);
+  return axios.delete(`${baseURL}/patient/${id}/delete`);
 };
 
 const editPatient = (patient) => {
-  return axios.put(`${baseURL}/patient/${patient.id}/update/`, patient, config);
+  return axios.put(`${baseURL}/patient/${patient.id}/update/`, patient);
 };
 
 export const usePatientsData = (onSuccess, onError) => {

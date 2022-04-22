@@ -5,17 +5,9 @@ import axios from "axios";
 //Variable imports
 import { baseURL } from "../../utils/baseURL";
 
-let user = localStorage.getItem("authTokens")
-  ? JSON.parse(localStorage.getItem("authTokens")).access
-  : null;
-
-const config = {
-  headers: { Authorization: `Bearer ${user}` },
-};
-
 //Fetcher Function
 const fetchSecretaries = () => {
-  return axios.get(`${baseURL}/user`, config);
+  return axios.get(`${baseURL}/user`);
 };
 
 const addSectretary = (secretary) => {
