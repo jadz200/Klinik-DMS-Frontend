@@ -6,7 +6,11 @@ import axios from "axios";
 import { baseURL } from "../../utils/baseURL";
 import { useStore } from "../Store/useStore";
 
-const user = useStore.getState().authTokens?.access;
+let user = useStore.getState().authTokens?.access;
+const unsub2 = useStore.subscribe(
+  (state) => state.authTokens,
+  (arg) => (user = arg.authTokens?.access)
+);
 
 const config = {
   headers: { Authorization: `Bearer ${user}` },
