@@ -75,11 +75,14 @@ const Login = () => {
               setPassword(e.target.value);
             }}
           />
+          <a href="https://klinik-dms-backend.herokuapp.com/account/password_reset/">
+            Forgot your password? Click here
+          </a>
 
           <Button
             label="Sign In"
             icon="pi pi-user"
-            className="w-full"
+            className="w-full mt-3"
             type="submit"
             onClick={(e) => {
               e.preventDefault();

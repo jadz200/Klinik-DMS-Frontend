@@ -45,7 +45,13 @@ const TopBar = () => {
         position="right"
         onHide={() => setVisible(false)}
       >
-        Profile Info
+        <Button
+          label="Logout"
+          onClick={() => {
+            localStorage.removeItem("authTokens");
+            location.reload();
+          }}
+        />
       </Sidebar>
     </>
   );
