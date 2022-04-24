@@ -34,10 +34,6 @@ const ListDoctor = () => {
             (doctor.first_name
               .toLocaleLowerCase()
               .includes(filter.toLocaleLowerCase()) ||
-              doctor.id
-                .toString()
-                .toLocaleLowerCase()
-                .includes(filter.toLocaleLowerCase()) ||
               doctor.last_name
                 .toLocaleLowerCase()
                 .includes(filter.toLocaleLowerCase()) ||
@@ -61,21 +57,15 @@ const ListDoctor = () => {
       >
         <Column selectionMode="multiple" style={{ width: "5%" }}></Column>
         <Column
-          field="id"
-          header="Staff ID"
-          style={{ width: "10%" }}
-          sortable
-        ></Column>
-        <Column
           field="first_name"
           header="First Name"
-          style={{ width: "15%" }}
+          style={{ width: "20%" }}
           sortable
         ></Column>
         <Column
           field="last_name"
           header="Last Name"
-          style={{ width: "20%" }}
+          style={{ width: "25%" }}
           sortable
         ></Column>
         <Column

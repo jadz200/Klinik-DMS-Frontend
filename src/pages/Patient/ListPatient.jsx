@@ -1,13 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { usePatientsData } from "@hooks/Queries/usePatientsData";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { useStore } from "../../hooks/Store/useStore";
 import { Button } from "primereact/button";
 import { useNavigate } from "react-router-dom";
+import { Dialog } from "primereact/dialog";
+import { InputTextarea } from "primereact/inputtextarea";
+import axios from "axios";
+import { baseURL } from "../../utils/baseURL";
 
 const ListPatient = () => {
   let selectedItems = useStore((state) => state.selectedItems);
+  const [sendMessage, setSendMessage] = useState(null);
+  const [message, setMessage] = useState("");
+  const [visible, setVisible] = useState(null);
   let setSelectedItems = useStore((state) => state.setSelectedItems);
   let filter = useStore((state) => state.filter);
   let setCurrentItem = useStore((state) => state.setCurrentItem);
@@ -20,14 +27,25 @@ const ListPatient = () => {
 
   const actionButtonsTemplate = (rowData) => {
     return (
-      <Button
-        label="New Visit"
-        className="p-button-info p-button-sm"
-        onClick={() => {
-          console.log(rowData);
-          navigate(`${rowData.id}/visit/create`);
-        }}
-      />
+      <>
+        <Button
+          label="New Visit"
+          className="p-button-info p-button-sm mr-3"
+          onClick={() => {
+            console.log(rowData);
+            navigate(`${rowData.id}/visit/create`);
+          }}
+        />
+        <Button
+          label="Send SMS"
+          className="p-button-help p-button-sm"
+          onClick={() => {
+            console.log(rowData);
+            setSendMessage(rowData);
+            setVisible(true);
+          }}
+        />
+      </>
     );
   };
 
@@ -50,10 +68,6 @@ const ListPatient = () => {
         value={patients.filter(
           (patient) =>
             patient.first_name
-              .toLocaleLowerCase()
-              .includes(filter.toLocaleLowerCase()) ||
-            patient.id
-              .toString()
               .toLocaleLowerCase()
               .includes(filter.toLocaleLowerCase()) ||
             patient.last_name
@@ -82,15 +96,9 @@ const ListPatient = () => {
       >
         <Column selectionMode="multiple" style={{ width: "5%" }}></Column>
         <Column
-          field="id"
-          header="Patient ID"
-          style={{ width: "13%" }}
-          sortable
-        ></Column>
-        <Column
           field="first_name"
           header="First Name"
-          style={{ width: "12%" }}
+          style={{ width: "15%" }}
           sortable
         ></Column>
         <Column
@@ -122,9 +130,42 @@ const ListPatient = () => {
         <Column
           header="Actions"
           body={actionButtonsTemplate}
-          style={{ width: "15%" }}
+          style={{ width: "25%" }}
         ></Column>
       </DataTable>
+      <Dialog
+        header={`Send Message to ${sendMessage?.first_name}`}
+        style={{ width: "50vw" }}
+        visible={visible}
+        onHide={() => {
+          setVisible(false);
+        }}
+      >
+        <InputTextarea
+          value={message}
+          onChange={(e) => {
+            setMessage(e.target.value);
+          }}
+          style={{ width: "100%" }}
+          rows={5}
+        />
+        <div className="flex w-full align-content-end justify-content-end mt-5">
+          <Button
+            label="Send"
+            disabled={true}
+            onClick={() => {
+              console.log(`${baseURL}/sms/patient/${sendMessage?.id}`);
+              setVisible(false);
+              axios
+                .post(`${baseURL}/sms/patient/${sendMessage?.id}/`, { message })
+                .then((resp) => {
+                  console.log(resp.data);
+                })
+                .catch((err) => console.log(err.response));
+            }}
+          />
+        </div>
+      </Dialog>
     </>
   );
 };

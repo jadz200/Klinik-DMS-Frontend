@@ -30,16 +30,11 @@ const ListRoom = () => {
         onSelectionChange={(e) => {
           setSelectedItems(e.value);
         }}
-        value={rooms.filter(
-          (room) =>
-            room.id
-              .toString()
-              .toLocaleLowerCase()
-              .includes(filter.toLocaleLowerCase()) ||
-            room.title
-              .toString()
-              .toLocaleLowerCase()
-              .includes(filter.toLocaleLowerCase())
+        value={rooms.filter((room) =>
+          room.title
+            .toString()
+            .toLocaleLowerCase()
+            .includes(filter.toLocaleLowerCase())
         )}
         dataKey="id"
         responsiveLayout="scroll"
@@ -53,15 +48,9 @@ const ListRoom = () => {
       >
         <Column selectionMode="multiple" style={{ width: "10%" }}></Column>
         <Column
-          field="id"
-          header="ID"
-          style={{ width: "10%" }}
-          sortable
-        ></Column>
-        <Column
           body={Clinic}
           header="Clinic Name"
-          style={{ width: "15%" }}
+          style={{ width: "25%" }}
           sortable
         ></Column>
         <Column
