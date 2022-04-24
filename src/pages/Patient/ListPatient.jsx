@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { usePatientsData } from "@hooks/Queries/usePatientsData";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
@@ -10,6 +10,11 @@ const ListPatient = () => {
   let selectedItems = useStore((state) => state.selectedItems);
   let setSelectedItems = useStore((state) => state.setSelectedItems);
   let filter = useStore((state) => state.filter);
+  let setCurrentItem = useStore((state) => state.setCurrentItem);
+  useEffect(() => {
+    setCurrentItem("");
+  }, []);
+
   const { isLoading, data: patients, isError, error } = usePatientsData();
   const navigate = useNavigate();
 

@@ -9,11 +9,21 @@ import { InputTextarea } from "primereact/inputtextarea";
 import { useDoctorsData } from "../../hooks/Queries/useDoctorsData";
 import { useRoomsData } from "../../hooks/Queries/useRoomsData";
 import { useNavigate } from "react-router-dom";
+import { useStore } from "../../hooks/Store/useStore";
+import { usePatientData } from "../../hooks/Queries/usePatientData";
 
 const CreateVisit = () => {
+  const setCurrentItem = useStore((state) => state.setCurrentItem);
+
   const { id } = useParams();
   console.log(id);
   const navigate = useNavigate();
+
+  const {
+    data: patient,
+    isLoading: patientIsLoading,
+    isError: patientIsError,
+  } = usePatientData(id);
 
   const {
     data: doctors,
@@ -59,11 +69,11 @@ const CreateVisit = () => {
     validationSchema,
   });
 
-  if (doctorIsError || roomIsError) {
+  if (doctorIsError || roomIsError || patientIsError) {
     return <div>An Error has occurred</div>;
   }
 
-  if (doctorIsLoading || roomIsLoading) {
+  if (doctorIsLoading || roomIsLoading || patientIsLoading) {
     return <div>is Loading</div>;
   }
 
@@ -82,6 +92,10 @@ const CreateVisit = () => {
       value: room.id,
     };
   });
+
+  setCurrentItem(
+    "Create Visit " + patient.first_name + "  " + patient.last_name
+  );
 
   return (
     <form id="createPatient" onSubmit={formik.handleSubmit}>

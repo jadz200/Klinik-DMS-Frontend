@@ -6,12 +6,15 @@ export const useStore = create((set) => ({
   setFilter: (text) => set({ filter: text }),
   selectedItems: [],
   setSelectedItems: (newItems) => set({ selectedItems: newItems }),
+  currentItem: "",
+  setCurrentItem: (newItem) => set({ currentItem: newItem }),
   removeAllSelecetedItems: () => set({ selectedItems: [] }),
   //Resets All Store items
   resetEverything: () => {
     set({
       selectedItems: [],
       filter: "",
+      currentItem: "",
     });
   },
   user: localStorage.getItem("authTokens")

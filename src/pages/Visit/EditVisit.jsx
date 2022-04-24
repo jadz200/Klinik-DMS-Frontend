@@ -13,10 +13,13 @@ import { formatISO } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import { useVisitData } from "../../hooks/Queries/useVisitData";
 import { parseJSON } from "date-fns/esm";
+import { usePatientData } from "../../hooks/Queries/usePatientData";
+import { useStore } from "../../hooks/Store/useStore";
 
 const EditVisit = () => {
   const { id, visitID } = useParams();
   console.log(id, visitID);
+  const setCurrentItem = useStore((state) => state.setCurrentItem);
 
   const {
     data: visit,
@@ -24,15 +27,23 @@ const EditVisit = () => {
     isError: visitIsError,
   } = useVisitData(visitID);
 
+  const {
+    data: patient,
+    isLoading: patientIsLoading,
+    isError: patientIsError,
+  } = usePatientData(id);
+
   console.log(visit);
 
-  if (visitIsError) {
+  if (visitIsError | patientIsError) {
     return <div>Error</div>;
   }
 
-  if (visitIsLoading) {
+  if (visitIsLoading | patientIsLoading) {
     return <div>Loading</div>;
   }
+  console.log(patient);
+  setCurrentItem("Edit Visit " + patient.first_name + "  " + patient.last_name);
 
   return <Form visit={visit} />;
 };

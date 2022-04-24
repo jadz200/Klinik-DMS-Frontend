@@ -10,8 +10,10 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { format, parseJSON } from "date-fns";
 import { Button } from "primereact/button";
+import { useStore } from "../../hooks/Store/useStore";
 
 const DetailPatient = () => {
+  const setCurrentItem = useStore((state) => state.setCurrentItem);
   const [activeIndex, setActiveIndex] = useState(0);
   const navigate = useNavigate();
   const { id } = useParams();
@@ -61,38 +63,42 @@ const DetailPatient = () => {
     return { ...visit, date };
   });
 
+  setCurrentItem("Detail " + patient.first_name + "  " + patient.last_name);
+
   return (
     <TabView
       activeIndex={activeIndex}
       onTabChange={(e) => setActiveIndex(e.index)}
     >
       <TabPanel header="Details">
-
         <div className="Wrapper">
-          <div  className="Box1">
-             <div className="Profile"><div className="Circle"></div> </div>
-             <div className="mail"><p className="text-xl ml-3">{patient.mail}</p></div>
+          <div className="Box1">
+            <div className="Profile">
+              <div className="Circle"></div>{" "}
+            </div>
+            <div className="mail">
+              <p className="text-xl ml-3">{patient.mail}</p>
+            </div>
           </div>
-          <div className="Box2"><div className="flex align-items-center align-content-center mb-4">
-          <h3 className="underline">First Name:</h3>
-          <p className="text-xl ml-4">{patient.first_name}</p>
-        </div> 
-        <div className="flex align-items-center align-content-center mb-4">
-          <h3 className="underline">Last Name:</h3>
-          <p className="text-xl ml-4">{patient.last_name}</p>
+          <div className="Box2">
+            <div className="flex align-items-center align-content-center mb-4">
+              <h3 className="underline">First Name:</h3>
+              <p className="text-xl ml-4">{patient.first_name}</p>
+            </div>
+            <div className="flex align-items-center align-content-center mb-4">
+              <h3 className="underline">Last Name:</h3>
+              <p className="text-xl ml-4">{patient.last_name}</p>
+            </div>
+            <div className="flex align-items-center align-content-center mb-4">
+              <h3 className="underline">Phone Number:</h3>
+              <p className="text-xl ml-4">{patient.phone}</p>
+            </div>
+            <div className="flex align-items-center align-content-center mb-4">
+              <h3 className="underline">Address Name:</h3>
+              <p className="text-xl ml-4">{patient.address}</p>
+            </div>
+          </div>
         </div>
-        <div className="flex align-items-center align-content-center mb-4">
-          <h3 className="underline">Phone Number:</h3>
-          <p className="text-xl ml-4">{patient.phone}</p>
-        </div>
-        <div className="flex align-items-center align-content-center mb-4">
-          <h3 className="underline">Address Name:</h3>
-          <p className="text-xl ml-4">{patient.address}</p>
-        </div>
-        </div>
-
-        </div>
-        
       </TabPanel>
       <TabPanel header="Visits">
         <DataTable value={visits} dataKey="id">

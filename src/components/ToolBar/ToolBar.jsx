@@ -31,6 +31,7 @@ const ToolBar = ({ moduleName, deleteFunction, setDialog }) => {
 
   let setFilter = useStore((state) => state.setFilter);
   let filter = useStore((state) => state.filter);
+  let currentItem = useStore((state) => state.currentItem);
 
   useEffect(() => {
     const path = location.pathname;
@@ -50,13 +51,16 @@ const ToolBar = ({ moduleName, deleteFunction, setDialog }) => {
       {crudState !== "list" || moduleName === "Appointment" ? (
         <div>
           {moduleName !== "Appointment" && (
-            <Button
-              icon="pi pi-angle-left text-2xl"
-              className="p-button-rounded p-button-text"
-              onClick={() => {
-                navigate(-1);
-              }}
-            />
+            <div className="flex align-items-center">
+              <Button
+                icon="pi pi-angle-left text-2xl"
+                className="p-button-rounded p-button-text"
+                onClick={() => {
+                  navigate(-1);
+                }}
+              />
+              <div>{currentItem}</div>
+            </div>
           )}
         </div>
       ) : (
