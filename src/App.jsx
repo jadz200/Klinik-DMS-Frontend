@@ -1,5 +1,5 @@
 //Hooks
-import React, { useState, useLayoutEffect } from "react";
+import React, { useState, useLayoutEffect, useEffect } from "react";
 
 //Component Imports
 import TopBar from "@components/Navigation/TopBar";
@@ -13,7 +13,7 @@ import DetailPatient from "@pages/Patient/DetailPatient";
 import RequireAuth from "./utils/RequireAuth";
 
 //Library Imports
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import Doctor from "./pages/Doctor/Doctor";
 import ListDoctor from "./pages/Doctor/ListDoctor";
 import EditDoctor from "./pages/Doctor/EditDoctor";
@@ -35,6 +35,14 @@ import EditVisit from "./pages/Visit/EditVisit";
 
 function App() {
   // Login to show which page to show
+  const location = useLocation();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (location.pathname === "/") {
+      navigate("patient");
+    }
+  }, [location.pathname]);
+
   const [login, setLogin] = useState(true);
   useLayoutEffect(() => {
     console.log(localStorage.getItem("visited"));
