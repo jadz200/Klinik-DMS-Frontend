@@ -32,7 +32,6 @@ const ListPatient = () => {
           label="New Visit"
           className="p-button-info p-button-sm mr-3"
           onClick={() => {
-            console.log(rowData);
             navigate(`${rowData.id}/visit/create`);
           }}
         />
@@ -40,7 +39,6 @@ const ListPatient = () => {
           label="Send SMS"
           className="p-button-help p-button-sm"
           onClick={() => {
-            console.log(rowData);
             setSendMessage(rowData);
             setVisible(true);
           }}
@@ -154,7 +152,6 @@ const ListPatient = () => {
             label="Send"
             disabled={true}
             onClick={() => {
-              console.log(`${baseURL}/sms/patient/${sendMessage?.id}`);
               setVisible(false);
               axios
                 .post(`${baseURL}/sms/patient/${sendMessage?.id}/`, { message })

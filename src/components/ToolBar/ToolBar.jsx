@@ -47,7 +47,7 @@ const ToolBar = ({ moduleName, deleteFunction, setDialog }) => {
   }, [location.pathname]);
 
   return (
-    <div className="header-main-content bg-white h-4rem pr-4 pl-1 py-2 flex justify-content-between align-items-center sticky top-0">
+    <div className="z-1 header-main-content bg-white h-4rem pr-4 pl-1 py-2 flex justify-content-between align-items-center sticky top-0">
       {crudState !== "list" || moduleName === "Appointment" ? (
         <div>
           {moduleName !== "Appointment" && (

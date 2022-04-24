@@ -44,11 +44,22 @@ export const usePatientVisitsData = (patientId) => {
   });
 };
 
-export const useAddVisitData = () => {
+export const useAddVisitData = (operations) => {
   const queryClient = useQueryClient();
   return useMutation(addVisit, {
     onSuccess: (data) => {
-      console.log(data);
+      operations.forEach((operation) => {
+        axios
+          .post(`${baseURL}/visitOperation/create/`, {
+            cost_currency: "USD",
+            cost: operation.cost,
+            operation: operation.id,
+            visitID: data.data.id,
+          })
+          .then((resp) => console.log(resp))
+          .catch((err) => console.log(err.response));
+      });
+      console.log(data.data.id);
       queryClient.invalidateQueries("visits");
     },
     onError: (err) => {

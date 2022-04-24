@@ -45,7 +45,6 @@ function App() {
 
   const [login, setLogin] = useState(true);
   useLayoutEffect(() => {
-    console.log(localStorage.getItem("visited"));
     if (localStorage.getItem("visited")) {
       setLogin(true);
     }

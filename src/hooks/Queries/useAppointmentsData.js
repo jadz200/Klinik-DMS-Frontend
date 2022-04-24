@@ -11,7 +11,6 @@ const fetchAppointments = () => {
 };
 
 const addAppointment = (appointment) => {
-  console.log(appointment);
   return axios.post(`${baseURL}/appointment/create/`, appointment);
 };
 
@@ -41,12 +40,9 @@ export const useAddAppointmentData = () => {
   const queryClient = useQueryClient();
   return useMutation(addAppointment, {
     onSuccess: (data) => {
-      console.log(data);
       queryClient.invalidateQueries("appointments");
     },
-    onError: (err) => {
-      console.log("Error", err.response);
-    },
+    onError: (err) => {},
   });
 };
 
@@ -63,11 +59,8 @@ export const useEditAppointmentData = () => {
   const queryClient = useQueryClient();
   return useMutation(editAppointment, {
     onSuccess: (data) => {
-      console.log(data);
       queryClient.invalidateQueries("appointments");
     },
-    onError: (err) => {
-      console.log(err);
-    },
+    onError: (err) => {},
   });
 };

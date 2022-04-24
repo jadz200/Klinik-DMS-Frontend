@@ -11,7 +11,6 @@ const List = ({ deleteFunction }) => {
   const showCUD =
     location.pathname.includes("doctor") ||
     location.pathname.includes("secretary");
-  console.log(showCUD);
 
   const toast = useRef(null);
   const accept = () => {

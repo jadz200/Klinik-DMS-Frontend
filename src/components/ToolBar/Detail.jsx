@@ -13,7 +13,7 @@ const Detail = ({ deleteFunction }) => {
   const showCUD =
     location.pathname.includes("doctor") ||
     location.pathname.includes("secretary");
-  console.log(showCUD);
+
   return (
     <>
       {!showCUD && (

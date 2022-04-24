@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAddVisitData } from "../../hooks/Queries/useVisitsData";
 import { useFormik } from "formik";
@@ -11,12 +11,20 @@ import { useRoomsData } from "../../hooks/Queries/useRoomsData";
 import { useNavigate } from "react-router-dom";
 import { useStore } from "../../hooks/Store/useStore";
 import { usePatientData } from "../../hooks/Queries/usePatientData";
+import { useOperationsData } from "../../hooks/Queries/useOperationsData";
+import { Dialog } from "primereact/dialog";
+import { Button } from "primereact/button";
+import { DataTable } from "primereact/datatable";
+import { Column } from "primereact/column";
 
 const CreateVisit = () => {
   const setCurrentItem = useStore((state) => state.setCurrentItem);
+  const [visible, setVisible] = useState(false);
+  const [price, setPrice] = useState(0);
+  const [visitOperation, setVisitOperation] = useState("");
+  const [visitOperations, setVisitOperations] = useState([]);
 
   const { id } = useParams();
-  console.log(id);
   const navigate = useNavigate();
 
   const {
@@ -37,7 +45,13 @@ const CreateVisit = () => {
     isError: roomIsError,
   } = useRoomsData();
 
-  const { mutate: addVisit } = useAddVisitData();
+  const {
+    data: operations,
+    isLoading: operationIsLoading,
+    isError: operationIsError,
+  } = useOperationsData();
+
+  const { mutate: addVisit } = useAddVisitData(visitOperations);
 
   const validationSchema = Yup.object({
     cost: Yup.string().required("Cost is Required"),
@@ -54,7 +68,6 @@ const CreateVisit = () => {
       roomID: "",
     },
     onSubmit: (values) => {
-      console.log(values);
       let visit = {
         comments: values.comments,
         cost: parseInt(values.cost),
@@ -62,18 +75,22 @@ const CreateVisit = () => {
         doctorID: values.doctorID,
         roomID: values.roomID,
       };
-      console.log(visit);
       addVisit(visit);
       navigate("/patient");
     },
     validationSchema,
   });
 
-  if (doctorIsError || roomIsError || patientIsError) {
+  if (doctorIsError || roomIsError || patientIsError || operationIsError) {
     return <div>An Error has occurred</div>;
   }
 
-  if (doctorIsLoading || roomIsLoading || patientIsLoading) {
+  if (
+    doctorIsLoading ||
+    roomIsLoading ||
+    patientIsLoading ||
+    operationIsLoading
+  ) {
     return <div>is Loading</div>;
   }
 
@@ -93,12 +110,44 @@ const CreateVisit = () => {
     };
   });
 
+  const operationOptions = operations.map((operation) => {
+    return {
+      label: operation.title,
+      value: operation.id,
+    };
+  });
+
   setCurrentItem(
     "Create Visit " + patient.first_name + "  " + patient.last_name
   );
 
+  const operationsTemplate = (rowData) => {
+    return (
+      <>{operations.find((operation) => operation.id === rowData.id).title}</>
+    );
+  };
+
   return (
     <form id="createPatient" onSubmit={formik.handleSubmit}>
+      <div className="mb-5">
+        <Button
+          label="Add Operation"
+          className="mb-5"
+          onClick={() => {
+            setVisible(true);
+          }}
+        />
+
+        <DataTable value={visitOperations}>
+          <Column
+            header="Name"
+            body={operationsTemplate}
+            style={{ width: "30%" }}
+          ></Column>
+          <Column field="cost" header="Cost" style={{ width: "70%" }}></Column>
+        </DataTable>
+      </div>
+
       {/*  */}
       <label htmlFor="comments" className="mb-1 inline-block">
         Comments:
@@ -169,6 +218,53 @@ const CreateVisit = () => {
           <span>{formik.errors.cost}</span>
         ) : null}
       </div>
+      <Dialog
+        header={`Add Operation`}
+        style={{ width: "50vw" }}
+        visible={visible}
+        onHide={() => {
+          setVisible(false);
+        }}
+      >
+        <label htmlFor="operation" className="mb-1 inline-block">
+          Operation:
+        </label>
+        <Dropdown
+          id="operation"
+          className="inputfield w-full mb-5"
+          name="operation"
+          autoComplete="nope"
+          required={true}
+          options={operationOptions}
+          value={visitOperation}
+          onChange={(e) => {
+            setVisitOperation(e.target.value);
+          }}
+        />
+        <InputText
+          id="price"
+          className="inputfield w-full mb-5"
+          name="price"
+          autoComplete="nope"
+          value={price}
+          onChange={(e) => {
+            setPrice(e.target.value);
+          }}
+        />
+        <Button
+          label="Add Operation"
+          disabled={visitOperation === ""}
+          onClick={() => {
+            setVisitOperations([
+              ...visitOperations,
+              { id: visitOperation, cost: price },
+            ]);
+            setVisitOperation("");
+            setPrice(0);
+            setVisible(false);
+          }}
+        />
+      </Dialog>
     </form>
   );
 };
