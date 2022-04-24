@@ -40,74 +40,90 @@ const CreatePatient = () => {
       {isError ? <div>An error occurred: {error.message}</div> : null}
       {isSuccess ? <div> It worked</div> : null}
       <form id="createPatient" onSubmit={formik.handleSubmit}>
-        <label htmlFor="first_name" className="mb-1 inline-block">
-          First Name:
-        </label>
-        <InputText
-          autoFocus={true}
-          id="first_name"
-          type="text"
-          className="inputfield w-full"
-          name="first_name"
-          autoComplete="nope"
-          {...formik.getFieldProps("first_name")}
-        />
-        <div className="p-error h-1rem">
-          {formik.touched.first_name && formik.errors.first_name ? (
-            <span>{formik.errors.first_name}</span>
-          ) : null}
+        <div className="flex w-full">
+          <div className="w-6 mr-5">
+            <label htmlFor="first_name" className="mb-1 inline-block">
+              First Name:
+            </label>
+            <InputText
+              autoFocus={true}
+              id="first_name"
+              type="text"
+              className="inputfield w-full"
+              name="first_name"
+              autoComplete="nope"
+              {...formik.getFieldProps("first_name")}
+            />
+            <div className="p-error h-1rem">
+              {formik.touched.first_name && formik.errors.first_name ? (
+                <span>{formik.errors.first_name}</span>
+              ) : null}
+            </div>
+          </div>
+          <div className="w-6">
+            <label htmlFor="last_name" className="mb-1 inline-block">
+              Last Name:
+            </label>
+            <InputText
+              id="last_name"
+              type="text"
+              className="inputfield w-full"
+              name="last_name"
+              autoComplete="nope"
+              {...formik.getFieldProps("last_name")}
+            />
+            <div className="p-error h-1rem">
+              {formik.touched.last_name && formik.errors.last_name ? (
+                <span>{formik.errors.last_name}</span>
+              ) : null}
+            </div>
+          </div>
         </div>
+        <div className="flex w-full">
+          <div className="w-6 mr-5">
+            <label htmlFor="phone" className="mb-1 inline-block">
+              Phone:
+            </label>
+            <InputText
+              id="phone"
+              type="text"
+              className="inputfield w-full"
+              name="phone"
+              autoComplete="nope"
+              {...formik.getFieldProps("phone")}
+            />
+            <div className="p-error h-1rem">
+              {formik.touched.phone && formik.errors.phone ? (
+                <span>{formik.errors.phone}</span>
+              ) : null}
+            </div>
+          </div>
+          <div className="w-6">
+            <label htmlFor="mail" className="mb-1 inline-block">
+              Email:
+            </label>
+            <InputText
+              id="mail"
+              type="text"
+              className="inputfield w-full"
+              name="mail"
+              autoComplete="nope"
+              {...formik.getFieldProps("mail")}
+            />
+            <div className="p-error h-1rem">
+              {formik.touched.mail && formik.errors.mail ? (
+                <span>{formik.errors.mail}</span>
+              ) : null}
+            </div>
+          </div>
+        </div>
+
         {/*  */}
-        <label htmlFor="last_name" className="mb-1 inline-block">
-          Last Name:
-        </label>
-        <InputText
-          id="last_name"
-          type="text"
-          className="inputfield w-full"
-          name="last_name"
-          autoComplete="nope"
-          {...formik.getFieldProps("last_name")}
-        />
-        <div className="p-error h-1rem">
-          {formik.touched.last_name && formik.errors.last_name ? (
-            <span>{formik.errors.last_name}</span>
-          ) : null}
-        </div>
+
         {/*  */}
-        <label htmlFor="phone" className="mb-1 inline-block">
-          Phone:
-        </label>
-        <InputText
-          id="phone"
-          type="text"
-          className="inputfield w-full"
-          name="phone"
-          autoComplete="nope"
-          {...formik.getFieldProps("phone")}
-        />
-        <div className="p-error h-1rem">
-          {formik.touched.phone && formik.errors.phone ? (
-            <span>{formik.errors.phone}</span>
-          ) : null}
-        </div>
+
         {/*  */}
-        <label htmlFor="mail" className="mb-1 inline-block">
-          Email:
-        </label>
-        <InputText
-          id="mail"
-          type="text"
-          className="inputfield w-full"
-          name="mail"
-          autoComplete="nope"
-          {...formik.getFieldProps("mail")}
-        />
-        <div className="p-error h-1rem">
-          {formik.touched.mail && formik.errors.mail ? (
-            <span>{formik.errors.mail}</span>
-          ) : null}
-        </div>
+
         {/*  */}
         <label htmlFor="address" className="mb-1 inline-block">
           Address:
