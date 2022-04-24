@@ -130,6 +130,8 @@ const CreateDialog = ({ visible, setVisible }) => {
       style={{ width: "50vw" }}
     >
       <form id="createAppointment" onSubmit={formik.handleSubmit}>
+      <div className="flex w-full">
+      <div className="w-6 mr-5">
         <label htmlFor="date" className="mb-1 inline-block">
           Date:
         </label>
@@ -147,7 +149,9 @@ const CreateDialog = ({ visible, setVisible }) => {
             <span>{formik.errors.date}</span>
           ) : null}
         </div>
+        </div>
         {/*  */}
+        <div className="w-6">
         <label htmlFor="duration" className="mb-1 inline-block">
           Duration:
         </label>
@@ -163,7 +167,11 @@ const CreateDialog = ({ visible, setVisible }) => {
             <span>{formik.errors.duration}</span>
           ) : null}
         </div>
+        </div>
+        </div>
         {/*  */}
+        <div className="flex w-full">
+        <div className="w-6 mr-5">
         <label htmlFor="reason" className="mb-1 inline-block">
           Reason:
         </label>
@@ -179,7 +187,9 @@ const CreateDialog = ({ visible, setVisible }) => {
             <span>{formik.errors.reason}</span>
           ) : null}
         </div>
+        </div>
         {/*  */}
+        <div className="w-6">
         <label htmlFor="doctorID" className="mb-1 inline-block">
           Doctor:
         </label>
@@ -196,7 +206,11 @@ const CreateDialog = ({ visible, setVisible }) => {
             <span>{formik.errors.doctorID}</span>
           ) : null}
         </div>
+        </div>
+        </div>
         {/*  */}
+        <div className="flex w-full">
+        <div className="w-6 mr-5">
         <label htmlFor="patientID" className="mb-1 inline-block">
           Patient:
         </label>
@@ -213,7 +227,9 @@ const CreateDialog = ({ visible, setVisible }) => {
             <span>{formik.errors.patientID}</span>
           ) : null}
         </div>
+        </div>
         {/*  */}
+        <div className="w-6">
         <label htmlFor="createdbyID" className="mb-1 inline-block">
           Created By:
         </label>
@@ -229,6 +245,8 @@ const CreateDialog = ({ visible, setVisible }) => {
           {formik.touched.createdbyID && formik.errors.createdbyID ? (
             <span>{formik.errors.createdbyID}</span>
           ) : null}
+        </div>
+        </div>
         </div>
         {/*  */}
         <label htmlFor="roomID" className="mb-1 inline-block">
