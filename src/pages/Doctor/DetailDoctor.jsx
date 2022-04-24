@@ -31,7 +31,7 @@ const DetailDoctor = () => {
       </div>
       <div className="flex align-items-center align-content-center mb-4">
         <h3 className="underline">Email:</h3>
-        <p className="text-xl ml-4">{data.mail}</p>
+        <p className="text-xl ml-4">{data.email}</p>
       </div>
     </Card>
   );

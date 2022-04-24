@@ -39,7 +39,7 @@ const ListSecretary = () => {
               secretary.last_name
                 .toLocaleLowerCase()
                 .includes(filter.toLocaleLowerCase()) ||
-              secretary.mail
+              secretary.email
                 .toLocaleLowerCase()
                 .includes(filter.toLocaleLowerCase()) ||
               secretary.phone
@@ -83,7 +83,7 @@ const ListSecretary = () => {
           sortable
         ></Column>
         <Column
-          field="mail"
+          field="email"
           header="Email"
           style={{
             width: "30%",

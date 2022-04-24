@@ -3,13 +3,11 @@ import { useParams } from "react-router-dom";
 import { useAddVisitData } from "../../hooks/Queries/useVisitsData";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { Calendar } from "primereact/calendar";
 import { InputText } from "primereact/inputtext";
 import { Dropdown } from "primereact/dropdown";
 import { InputTextarea } from "primereact/inputtextarea";
 import { useDoctorsData } from "../../hooks/Queries/useDoctorsData";
 import { useRoomsData } from "../../hooks/Queries/useRoomsData";
-import { formatISO } from "date-fns";
 import { useNavigate } from "react-router-dom";
 
 const CreateVisit = () => {
@@ -32,7 +30,6 @@ const CreateVisit = () => {
   const { mutate: addVisit } = useAddVisitData();
 
   const validationSchema = Yup.object({
-    date: Yup.string().required("Date is Required"),
     cost: Yup.string().required("Cost is Required"),
     comments: Yup.string(),
     doctorID: Yup.string().required("Doctor is Required"),
@@ -41,7 +38,6 @@ const CreateVisit = () => {
 
   const formik = useFormik({
     initialValues: {
-      date: "",
       cost: "0",
       comments: "",
       doctorID: "",
@@ -50,7 +46,6 @@ const CreateVisit = () => {
     onSubmit: (values) => {
       console.log(values);
       let visit = {
-        date: formatISO(values.date),
         comments: values.comments,
         cost: parseInt(values.cost),
         patientID: parseInt(id),
@@ -90,23 +85,6 @@ const CreateVisit = () => {
 
   return (
     <form id="createPatient" onSubmit={formik.handleSubmit}>
-      <label htmlFor="date" className="mb-1 inline-block">
-        Date:
-      </label>
-      <Calendar
-        autoFocus={true}
-        id="date"
-        className="inputfield w-full"
-        name="date"
-        autoComplete="nope"
-        showTime
-        {...formik.getFieldProps("date")}
-      />
-      <div className="p-error h-2rem">
-        {formik.touched.date && formik.errors.date ? (
-          <span>{formik.errors.date}</span>
-        ) : null}
-      </div>
       {/*  */}
       <label htmlFor="comments" className="mb-1 inline-block">
         Comments:
