@@ -66,77 +66,83 @@ const DetailPatient = () => {
   setCurrentItem("Detail " + patient.first_name + "  " + patient.last_name);
 
   return (
-    <TabView
-      activeIndex={activeIndex}
-      onTabChange={(e) => setActiveIndex(e.index)}
-    >
-      <TabPanel header="Details">
-        <div className="Wrapper">
-          <div className="Box1">
-            <div className="Profile">
-              <div className="Circle"></div>{" "}
+    <>
+      <div className="card ">
+        <div className="card-container m-4 overflow-hidden border-round m-2">
+          <div className="flex ">
+            <div className="flex-none flex align-items-center justify-content-center bg-white text-black m-2 px-5 py-3 ">
+              <div className="flex align-items-center align-content-center mb-4">
+                <p className="text-xl ml-4 underline">{patient.mail}</p>
+              </div>
             </div>
-            <div className="mail">
-              <p className="text-xl ml-3">{patient.mail}</p>
-            </div>
-          </div>
-          <div className="Box2">
-            <div className="flex align-items-center align-content-center mb-4">
-              <h3 className="underline">First Name:</h3>
-              <p className="text-xl ml-4">{patient.first_name}</p>
-            </div>
-            <div className="flex align-items-center align-content-center mb-4">
-              <h3 className="underline">Last Name:</h3>
-              <p className="text-xl ml-4">{patient.last_name}</p>
-            </div>
-            <div className="flex align-items-center align-content-center mb-4">
-              <h3 className="underline">Phone Number:</h3>
-              <p className="text-xl ml-4">{patient.phone}</p>
-            </div>
-            <div className="flex align-items-center align-content-center mb-4">
-              <h3 className="underline">Address Name:</h3>
-              <p className="text-xl ml-4">{patient.address}</p>
+            <div className="flex-1 flex bg-white text-black m-2 px-5 py-3 ">
+              <div className="grid">
+                <div className=" grid col-12 ">
+                  <h3 className="underline font-bold ">First Name:</h3>
+                  <p className="text-xl ml-4">{patient.first_name}</p>
+                </div>
+                <div className="grid col-12 ">
+                  <h3 className="underline font-bold  ">Last Name:</h3>
+                  <p className="text-xl ml-4 ">{patient.last_name}</p>
+                </div>
+              </div>
+              <div className="grid">
+                <div className=" grid col-12 mb-4">
+                  <h3 className="underline font-bold ">Phone Number:</h3>
+                  <p className="text-xl ml-4">{patient.phone}</p>
+                </div>
+                <div className=" grid col-12 mb-4">
+                  <h3 className="underline font-bold ">Address Name:</h3>
+                  <p className="text-xl ml-4">{patient.address}</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </TabPanel>
-      <TabPanel header="Visits">
-        <DataTable value={visits} dataKey="id">
-          <Column
-            sortable
-            field="comments"
-            header="Comments"
-            style={{ width: "40%" }}
-          ></Column>
-          <Column
-            sortable
-            field="cost_currency"
-            header="Currency"
-            style={{ width: "10%" }}
-          ></Column>
-          <Column
-            sortable
-            field="cost"
-            header="Cost"
-            style={{ width: "10%" }}
-          ></Column>
-          <Column
-            sortable
-            field="date"
-            header="Date"
-            style={{ width: "20%" }}
-          ></Column>
-          <Column
-            header="Actions"
-            body={actionButtonsTemplate}
-            style={{ width: "20%" }}
-            onClick={(e) => {
-              console.log(e);
-            }}
-          ></Column>
-        </DataTable>
-      </TabPanel>
-    </TabView>
+      </div>
+
+      <TabView
+        activeIndex={activeIndex}
+        onTabChange={(e) => setActiveIndex(e.index)}
+      >
+        <TabPanel header="Visits">
+          <DataTable value={visits} dataKey="id">
+            <Column
+              sortable
+              field="comments"
+              header="Comments"
+              style={{ width: "40%" }}
+            ></Column>
+            <Column
+              sortable
+              field="cost_currency"
+              header="Currency"
+              style={{ width: "10%" }}
+            ></Column>
+            <Column
+              sortable
+              field="cost"
+              header="Cost"
+              style={{ width: "10%" }}
+            ></Column>
+            <Column
+              sortable
+              field="date"
+              header="Date"
+              style={{ width: "20%" }}
+            ></Column>
+            <Column
+              header="Actions"
+              body={actionButtonsTemplate}
+              style={{ width: "20%" }}
+              onClick={(e) => {
+                console.log(e);
+              }}
+            ></Column>
+          </DataTable>
+        </TabPanel>
+      </TabView>
+    </>
   );
 };
 
