@@ -6,7 +6,6 @@ import { Calendar } from "primereact/calendar";
 import { InputText } from "primereact/inputtext";
 import { InputNumber } from "primereact/inputnumber";
 import { useDoctorsData } from "../../hooks/Queries/useDoctorsData";
-import { useSecretariesData } from "../../hooks/Queries/useSecretariesData";
 import { usePatientsData } from "../../hooks/Queries/usePatientsData";
 import { useRoomsData } from "../../hooks/Queries/useRoomsData";
 import { Dropdown } from "primereact/dropdown";
@@ -17,11 +16,6 @@ import { formatISO } from "date-fns";
 
 const CreateDialog = ({ visible, setVisible }) => {
   const { mutate: addAppointment } = useAddAppointmentData();
-  const {
-    data: secretaries,
-    isLoading: secretaryIsLoading,
-    isError: secretaryIsError,
-  } = useSecretariesData();
 
   const {
     data: doctors,
@@ -45,7 +39,6 @@ const CreateDialog = ({ visible, setVisible }) => {
     date: Yup.string().required("Date is Required"),
     duration: Yup.string().required("Duration is Required"),
     reason: Yup.string().required("Reason is Required"),
-    createdbyID: Yup.number().required("Created By is Required"),
     roomID: Yup.string().required("Room is Required"),
     doctorID: Yup.string().required("Doctor is Required"),
     patientID: Yup.string().required("Patient is Required"),
@@ -56,7 +49,6 @@ const CreateDialog = ({ visible, setVisible }) => {
       date: "",
       reason: "",
       duration: 30,
-      createdbyID: "",
       roomID: "",
       doctorID: "",
       patientID: "",
@@ -66,7 +58,6 @@ const CreateDialog = ({ visible, setVisible }) => {
         date: formatISO(values.date),
         reason: values.reason,
         duration: values.duration,
-        createdbyID: values.createdbyID,
         doctorID: values.doctorID,
         roomID: values.roomID,
         patientID: values.patientID,
@@ -77,15 +68,10 @@ const CreateDialog = ({ visible, setVisible }) => {
     },
     validationSchema,
   });
-  if (patientIsError || doctorIsError || secretaryIsError || roomIsError) {
+  if (patientIsError || doctorIsError || roomIsError) {
     return <div>Error</div>;
   }
-  if (
-    patientIsLoading ||
-    doctorIsLoading ||
-    secretaryIsLoading ||
-    roomIsLoading
-  ) {
+  if (patientIsLoading || doctorIsLoading || roomIsLoading) {
     return <div>Is Loading</div>;
   }
   const patientsOptions = patients.map((patient) => {
@@ -101,15 +87,6 @@ const CreateDialog = ({ visible, setVisible }) => {
       return {
         label: doctor.first_name,
         value: doctor.id,
-      };
-    });
-
-  const secretariesOptions = secretaries
-    .filter((secretary) => secretary.roleID === 2)
-    .map((secretary) => {
-      return {
-        label: secretary.first_name,
-        value: secretary.id,
       };
     });
 
@@ -130,87 +107,86 @@ const CreateDialog = ({ visible, setVisible }) => {
       style={{ width: "50vw" }}
     >
       <form id="createAppointment" onSubmit={formik.handleSubmit}>
-      <div className="flex w-full">
-      <div className="w-6 mr-5">
-        <label htmlFor="date" className="mb-1 inline-block">
-          Date:
-        </label>
-        <Calendar
-          autoFocus={true}
-          id="date"
-          className="inputfield w-full"
-          name="date"
-          autoComplete="nope"
-          showTime
-          {...formik.getFieldProps("date")}
-        />
-        <div className="p-error h-2rem">
-          {formik.touched.date && formik.errors.date ? (
-            <span>{formik.errors.date}</span>
-          ) : null}
-        </div>
-        </div>
-        {/*  */}
-        <div className="w-6">
-        <label htmlFor="duration" className="mb-1 inline-block">
-          Duration:
-        </label>
-        <InputNumber
-          id="duration"
-          className="inputfield w-full"
-          name="duration"
-          autoComplete="nope"
-          {...formik.getFieldProps("duration")}
-        />
-        <div className="p-error h-2rem">
-          {formik.touched.duration && formik.errors.duration ? (
-            <span>{formik.errors.duration}</span>
-          ) : null}
-        </div>
-        </div>
+        <div className="flex w-full">
+          <div className="w-6 mr-5">
+            <label htmlFor="date" className="mb-1 inline-block">
+              Date:
+            </label>
+            <Calendar
+              autoFocus={true}
+              id="date"
+              className="inputfield w-full"
+              name="date"
+              autoComplete="nope"
+              showTime
+              {...formik.getFieldProps("date")}
+            />
+            <div className="p-error h-2rem">
+              {formik.touched.date && formik.errors.date ? (
+                <span>{formik.errors.date}</span>
+              ) : null}
+            </div>
+          </div>
+          {/*  */}
+          <div className="w-6">
+            <label htmlFor="duration" className="mb-1 inline-block">
+              Duration:
+            </label>
+            <InputNumber
+              id="duration"
+              className="inputfield w-full"
+              name="duration"
+              autoComplete="nope"
+              {...formik.getFieldProps("duration")}
+            />
+            <div className="p-error h-2rem">
+              {formik.touched.duration && formik.errors.duration ? (
+                <span>{formik.errors.duration}</span>
+              ) : null}
+            </div>
+          </div>
         </div>
         {/*  */}
         <div className="flex w-full">
-        <div className="w-6 mr-5">
-        <label htmlFor="reason" className="mb-1 inline-block">
-          Reason:
-        </label>
-        <InputText
-          id="reason"
-          className="inputfield w-full"
-          name="reason"
-          autoComplete="nope"
-          {...formik.getFieldProps("reason")}
-        />
-        <div className="p-error h-2rem">
-          {formik.touched.reason && formik.errors.reason ? (
-            <span>{formik.errors.reason}</span>
-          ) : null}
-        </div>
+          <div className="w-6 mr-5">
+            <label htmlFor="reason" className="mb-1 inline-block">
+              Reason:
+            </label>
+            <InputText
+              id="reason"
+              className="inputfield w-full"
+              name="reason"
+              autoComplete="nope"
+              {...formik.getFieldProps("reason")}
+            />
+            <div className="p-error h-2rem">
+              {formik.touched.reason && formik.errors.reason ? (
+                <span>{formik.errors.reason}</span>
+              ) : null}
+            </div>
+          </div>
+          {/*  */}
+          <div className="w-6">
+            <label htmlFor="doctorID" className="mb-1 inline-block">
+              Doctor:
+            </label>
+            <Dropdown
+              id="doctorID"
+              className="inputfield w-full"
+              name="doctorID"
+              autoComplete="nope"
+              options={doctorsOptions}
+              {...formik.getFieldProps("doctorID")}
+            />
+            <div className="p-error h-2rem">
+              {formik.touched.doctorID && formik.errors.doctorID ? (
+                <span>{formik.errors.doctorID}</span>
+              ) : null}
+            </div>
+          </div>
         </div>
         {/*  */}
-        <div className="w-6">
-        <label htmlFor="doctorID" className="mb-1 inline-block">
-          Doctor:
-        </label>
-        <Dropdown
-          id="doctorID"
-          className="inputfield w-full"
-          name="doctorID"
-          autoComplete="nope"
-          options={doctorsOptions}
-          {...formik.getFieldProps("doctorID")}
-        />
-        <div className="p-error h-2rem">
-          {formik.touched.doctorID && formik.errors.doctorID ? (
-            <span>{formik.errors.doctorID}</span>
-          ) : null}
-        </div>
-        </div>
-        </div>
-        {/*  */}
-        <div className="flex w-full">
-        <div className="w-6 mr-5">
+
         <label htmlFor="patientID" className="mb-1 inline-block">
           Patient:
         </label>
@@ -226,27 +202,8 @@ const CreateDialog = ({ visible, setVisible }) => {
           {formik.touched.patientID && formik.errors.patientID ? (
             <span>{formik.errors.patientID}</span>
           ) : null}
-        </div>
-        </div>
-        {/*  */}
-        <div className="w-6">
-        <label htmlFor="createdbyID" className="mb-1 inline-block">
-          Created By:
-        </label>
-        <Dropdown
-          id="createdbyID"
-          className="inputfield w-full"
-          name="createdbyID"
-          autoComplete="nope"
-          options={secretariesOptions}
-          {...formik.getFieldProps("createdbyID")}
-        />
-        <div className="p-error h-2rem">
-          {formik.touched.createdbyID && formik.errors.createdbyID ? (
-            <span>{formik.errors.createdbyID}</span>
-          ) : null}
-        </div>
-        </div>
+
+          {/*  */}
         </div>
         {/*  */}
         <label htmlFor="roomID" className="mb-1 inline-block">
