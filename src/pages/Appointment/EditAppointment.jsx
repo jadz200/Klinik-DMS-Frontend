@@ -63,6 +63,8 @@ const EditAppointment = ({ appointment, setVisible }) => {
   });
   return (
     <form id="editAppointment" onSubmit={formik.handleSubmit}>
+      <div className="flex w-full mt-3">
+      <div className="w-6 mr-5">
       <label htmlFor="date" className="mb-1 inline-block">
         Date:
       </label>
@@ -80,7 +82,9 @@ const EditAppointment = ({ appointment, setVisible }) => {
           <span>{formik.errors.date}</span>
         ) : null}
       </div>
+      </div>
       {/*  */}
+      <div className="w-6">
       <label htmlFor="duration" className="mb-1 inline-block">
         Duration:
       </label>
@@ -96,7 +100,11 @@ const EditAppointment = ({ appointment, setVisible }) => {
           <span>{formik.errors.duration}</span>
         ) : null}
       </div>
+      </div>
+      </div>
       {/*  */}
+      <div className="flex w-full">
+      <div className="w-6 mr-5">
       <label htmlFor="reason" className="mb-1 inline-block">
         Reason:
       </label>
@@ -112,7 +120,9 @@ const EditAppointment = ({ appointment, setVisible }) => {
           <span>{formik.errors.reason}</span>
         ) : null}
       </div>
+      </div>
       {/*  */}
+      <div className="w-6">
       <label htmlFor="roomID" className="mb-1 inline-block">
         Room:
       </label>
@@ -128,6 +138,8 @@ const EditAppointment = ({ appointment, setVisible }) => {
         {formik.touched.roomID && formik.errors.roomID ? (
           <span>{formik.errors.roomID}</span>
         ) : null}
+      </div>
+      </div>
       </div>
     </form>
   );
