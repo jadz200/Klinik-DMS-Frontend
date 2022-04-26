@@ -149,23 +149,7 @@ const CreateVisit = () => {
       </div>
 
       {/*  */}
-      <label htmlFor="comments" className="mb-1 inline-block">
-        Comments:
-      </label>
-      <InputTextarea
-        cols={30}
-        rows={5}
-        id="comments"
-        className="inputfield w-full"
-        name="comments"
-        autoComplete="nope"
-        {...formik.getFieldProps("comments")}
-      />
-      <div className="p-error h-2rem">
-        {formik.touched.comments && formik.errors.comments ? (
-          <span>{formik.errors.comments}</span>
-        ) : null}
-      </div>
+
       {/*  */}
       <label htmlFor="doctorID" className="mb-1 inline-block">
         Doctor:
@@ -218,6 +202,23 @@ const CreateVisit = () => {
           <span>{formik.errors.cost}</span>
         ) : null}
       </div>
+      <label htmlFor="comments" className="mb-1 inline-block">
+        Comments:
+      </label>
+      <InputTextarea
+        cols={30}
+        rows={5}
+        id="comments"
+        className="inputfield w-full"
+        name="comments"
+        autoComplete="nope"
+        {...formik.getFieldProps("comments")}
+      />
+      <div className="p-error h-2rem">
+        {formik.touched.comments && formik.errors.comments ? (
+          <span>{formik.errors.comments}</span>
+        ) : null}
+      </div>
       <Dialog
         header={`Add Operation`}
         style={{ width: "50vw" }}
@@ -238,9 +239,21 @@ const CreateVisit = () => {
           options={operationOptions}
           value={visitOperation}
           onChange={(e) => {
-            setVisitOperation(e.target.value);
+            const operation = e.target.value;
+            setVisitOperation(operation);
+            console.log(e.target.value);
+            if (operation == 2) {
+              setPrice(10);
+            } else if (operation == 3) {
+              setPrice(25);
+            } else if (operation == 5) {
+              setPrice(15);
+            }
           }}
         />
+        <label htmlFor="price" className="mb-1 inline-block">
+          Cost:
+        </label>
         <InputText
           id="price"
           className="inputfield w-full mb-5"
@@ -262,6 +275,12 @@ const CreateVisit = () => {
             setVisitOperation("");
             setPrice(0);
             setVisible(false);
+            let sum = 0;
+            visitOperations.forEach((op) => {
+              sum += op.cost;
+            });
+            console.log(sum + price);
+            formik.setFieldValue("cost", sum + price);
           }}
         />
       </Dialog>

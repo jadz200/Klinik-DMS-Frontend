@@ -150,7 +150,7 @@ const ListPatient = () => {
         <div className="flex w-full align-content-end justify-content-end mt-5">
           <Button
             label="Send"
-            disabled={true}
+            disabled={false}
             onClick={() => {
               setVisible(false);
               axios
