@@ -8,8 +8,13 @@ import EditAppointment from "./EditAppointment";
 import { useAppointmentData } from "../../hooks/Queries/useAppointmentData";
 import { Button } from "primereact/button";
 import { useDeleteAppointmentData } from "../../hooks/Queries/useAppointmentsData";
+import { useStore } from "../../hooks/Store/useStore";
+import { useNavigate } from "react-router-dom";
 
 const ViewEditDeleteDialog = ({ visible, setVisible }) => {
+  const navigate = useNavigate();
+  const patientVisit = useStore((state) => state.patientVisit);
+  console.log(patientVisit);
   const { id } = useParams();
   const { data, isLoading, isError, Error } = useAppointmentData(id);
   const { mutate: deleteAppointment } = useDeleteAppointmentData();
@@ -22,15 +27,25 @@ const ViewEditDeleteDialog = ({ visible, setVisible }) => {
   const footer = (
     <div>
       {activeIndex === 0 ? (
-        <Button
-          label="Delete"
-          icon="pi pi-trash"
-          className="p-button-danger"
-          onClick={() => {
-            deleteAppointment(id);
-            setVisible(false);
-          }}
-        />
+        <>
+          <Button
+            label="Create Visit"
+            icon="pi pi-check-square"
+            className="p-button-info"
+            onClick={() => {
+              navigate(`/patient/${patientVisit.id}/visit/create`);
+            }}
+          />
+          <Button
+            label="Delete"
+            icon="pi pi-trash"
+            className="p-button-danger"
+            onClick={() => {
+              deleteAppointment(id);
+              setVisible(false);
+            }}
+          />
+        </>
       ) : (
         <Button
           label="Edit"

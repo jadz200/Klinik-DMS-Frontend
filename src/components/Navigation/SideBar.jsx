@@ -9,9 +9,14 @@ import { HiOutlineDesktopComputer } from "react-icons/hi";
 import { ImCalendar } from "react-icons/im";
 import { MdMeetingRoom } from "react-icons/md";
 import Logo from "@assets/images/Logo.png";
+import { useStore } from "../../hooks/Store/useStore";
 
 // eslint-disable-next-line react/prop-types
 const SideBar = ({ sideBar, setSideBar }) => {
+  const setPatientAppointment = useStore(
+    (state) => state.setPatientAppointment
+  );
+
   const items = [
     {
       path: "/patient",
@@ -64,6 +69,9 @@ const SideBar = ({ sideBar, setSideBar }) => {
               key={index}
               to={item.path}
               className="nav-item flex justify-content-between align-content-center align-items-center px-3 py-3 h-4rem text-xl"
+              onClick={() => {
+                setPatientAppointment(null);
+              }}
             >
               <div className="nav-icon">{item.icon}</div>
               {sideBar && <div className="nav-text">{item.text}</div>}

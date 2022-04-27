@@ -18,6 +18,8 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 
 const CreateVisit = () => {
+  const doctorVisit = useStore((state) => state.doctorVisit);
+  const roomVisit = useStore((state) => state.roomVisit);
   const setCurrentItem = useStore((state) => state.setCurrentItem);
   const [visible, setVisible] = useState(false);
   const [price, setPrice] = useState(0);
@@ -64,8 +66,8 @@ const CreateVisit = () => {
     initialValues: {
       cost: "0",
       comments: "",
-      doctorID: "",
-      roomID: "",
+      doctorID: doctorVisit ? doctorVisit.id : "",
+      roomID: roomVisit ? roomVisit.id : "",
     },
     onSubmit: (values) => {
       let visit = {

@@ -4,8 +4,12 @@ import React from "react";
 import { useDoctorData } from "../../hooks/Queries/useDoctorData";
 import { usePatientData } from "../../hooks/Queries/usePatientData";
 import { useRoomData } from "../../hooks/Queries/useRoomData";
+import { useStore } from "../../hooks/Store/useStore";
 
 const ViewAppointment = ({ appointment }) => {
+  const setPatientVisit = useStore((state) => state.setPatientVisit);
+  const setDoctorVisit = useStore((state) => state.setDoctorVisit);
+  const setRoomVisit = useStore((state) => state.setRoomVisit);
   const {
     data: patient,
     isLoading: patientIsLoading,
@@ -30,9 +34,13 @@ const ViewAppointment = ({ appointment }) => {
     return <div>Loading...</div>;
   }
 
+  setRoomVisit(room);
+  setPatientVisit(patient);
+  setDoctorVisit(doctor);
+
   return (
     <>
-      <div className="flex align-items-center align-content-center mb-4">
+      <div className="flex align-items-center align-content-center mb-4 mt-4">
         <h3 className="underline">Date:</h3>
         <p className="text-xl ml-4">
           {format(parseJSON(appointment.date), "yyyy-MM-dd' at 'HH:mm")}

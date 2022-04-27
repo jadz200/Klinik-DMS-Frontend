@@ -10,10 +10,13 @@ import { parseJSON } from "date-fns";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import { useNavigate } from "react-router-dom";
 import CreateDialog from "./CreateDialog";
+import { useStore } from "../../hooks/Store/useStore";
 import ViewEditDeleteDialog from "./ViewEditDeleteDialog";
 
 const Appointment = () => {
+  const patientAppointment = useStore((state) => state.patientAppointment);
   const [displayCreateDialog, setdisplayCreateDialog] = useState(false);
+  const [dateSelected, setDateSelected] = useState(null);
   const [displayViewEditDeleteDialog, setdisplayViewEditDeleteDialog] =
     useState(false);
   let navigate = useNavigate();
@@ -40,7 +43,7 @@ const Appointment = () => {
 
       var calendar = new Calendar(calendarEl, {
         height: "100%",
-        initialView: "dayGridMonth",
+        initialView: "timeGridWeek",
         plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin],
         headerToolbar: {
           center: "dayGridMonth,timeGridWeek,timeGridDay",
@@ -49,6 +52,10 @@ const Appointment = () => {
         eventClick: (e) => {
           navigate(e.event._def.publicId);
           setdisplayViewEditDeleteDialog(true);
+        },
+        dateClick: (e) => {
+          setDateSelected(new Date(e.date));
+          setdisplayCreateDialog(true);
         },
 
         events: formattedData,
@@ -73,6 +80,8 @@ const Appointment = () => {
       <CreateDialog
         visible={displayCreateDialog}
         setVisible={setdisplayCreateDialog}
+        dateSelected={dateSelected}
+        patientAppointment={patientAppointment}
       />
       <ViewEditDeleteDialog
         visible={displayViewEditDeleteDialog}

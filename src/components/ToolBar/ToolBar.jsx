@@ -32,6 +32,7 @@ const ToolBar = ({ moduleName, deleteFunction, setDialog }) => {
   let setFilter = useStore((state) => state.setFilter);
   let filter = useStore((state) => state.filter);
   let currentItem = useStore((state) => state.currentItem);
+  let patientAppointment = useStore((state) => state.patientAppointment);
 
   useEffect(() => {
     const path = location.pathname;
@@ -62,6 +63,7 @@ const ToolBar = ({ moduleName, deleteFunction, setDialog }) => {
               <div>{currentItem}</div>
             </div>
           )}
+          {patientAppointment ? patientAppointment.first_name : ""}
         </div>
       ) : (
         <div className="ml-3">

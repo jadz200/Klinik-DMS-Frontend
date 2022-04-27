@@ -25,4 +25,12 @@ export const useStore = create((set) => ({
     ? JSON.parse(localStorage.getItem("authTokens"))
     : null,
   setAuthTokens: (auth) => set({ authTokens: auth }),
+  patientAppointment: null,
+  setPatientAppointment: (patient) => set({ patientAppointment: patient }),
+  patientVisit: null,
+  setPatientVisit: (patient) => set({ patientVisit: patient }),
+  doctorVisit: null,
+  setDoctorVisit: (doctor) => set({ doctorVisit: doctor }),
+  roomVisit: null,
+  setRoomVisit: (room) => set({ roomVisit: room }),
 }));

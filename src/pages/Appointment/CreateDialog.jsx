@@ -14,8 +14,14 @@ import { Button } from "primereact/button";
 import { useAddAppointmentData } from "../../hooks/Queries/useAppointmentsData";
 import { formatISO } from "date-fns";
 
-const CreateDialog = ({ visible, setVisible }) => {
+const CreateDialog = ({
+  visible,
+  setVisible,
+  dateSelected,
+  patientAppointment,
+}) => {
   const { mutate: addAppointment } = useAddAppointmentData();
+  console.log(patientAppointment);
 
   const {
     data: doctors,
@@ -45,13 +51,14 @@ const CreateDialog = ({ visible, setVisible }) => {
   });
 
   const formik = useFormik({
+    enableReinitialize: true,
     initialValues: {
-      date: "",
+      date: dateSelected,
       reason: "",
       duration: 30,
       roomID: "",
       doctorID: "",
-      patientID: "",
+      patientID: patientAppointment?.id ? patientAppointment.id : "",
     },
     onSubmit: (values, { resetForm }) => {
       let appointment = {

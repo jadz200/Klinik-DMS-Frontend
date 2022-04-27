@@ -12,6 +12,9 @@ import { baseURL } from "../../utils/baseURL";
 
 const ListPatient = () => {
   let selectedItems = useStore((state) => state.selectedItems);
+  const setPatientAppointment = useStore(
+    (state) => state.setPatientAppointment
+  );
   const [sendMessage, setSendMessage] = useState(null);
   const [message, setMessage] = useState("");
   const [visible, setVisible] = useState(null);
@@ -37,10 +40,18 @@ const ListPatient = () => {
         />
         <Button
           label="Send SMS"
-          className="p-button-help p-button-sm"
+          className="p-button-help p-button-sm mr-3"
           onClick={() => {
             setSendMessage(rowData);
             setVisible(true);
+          }}
+        />
+        <Button
+          label="Schedule Appointment"
+          className="p-button-warning p-button-sm"
+          onClick={() => {
+            setPatientAppointment(rowData);
+            navigate("/appointment");
           }}
         />
       </>
@@ -96,13 +107,13 @@ const ListPatient = () => {
         <Column
           field="first_name"
           header="First Name"
-          style={{ width: "15%" }}
+          style={{ width: "10%" }}
           sortable
         ></Column>
         <Column
           field="last_name"
           header="Last Name"
-          style={{ width: "13%" }}
+          style={{ width: "10%" }}
           sortable
         ></Column>
         <Column
@@ -122,13 +133,13 @@ const ListPatient = () => {
         <Column
           field="address"
           header="Address"
-          style={{ width: "12%" }}
+          style={{ width: "10%" }}
           sortable
         ></Column>
         <Column
           header="Actions"
           body={actionButtonsTemplate}
-          style={{ width: "25%" }}
+          style={{ width: "35%" }}
         ></Column>
       </DataTable>
       <Dialog
