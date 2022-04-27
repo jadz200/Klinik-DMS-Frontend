@@ -10,7 +10,7 @@ const CreateRoom = () => {
   const navigate = useNavigate();
   const { mutate: addRoom } = useAddRoomData();
   const validationSchema = Yup.object({
-    title: Yup.string().required("First Name is Required"),
+    title: Yup.string().required("Room Title is Required"),
   });
   const formik = useFormik({
     initialValues: {

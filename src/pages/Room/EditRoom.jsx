@@ -32,7 +32,7 @@ const Form = ({ data, id }) => {
   const { mutate: editRoom } = useEditRoomData();
   const navigate = useNavigate();
   const validationSchema = Yup.object({
-    title: Yup.string().required("First Name is Required"),
+    title: Yup.string().required("Room Name is Required"),
   });
   const formik = useFormik({
     initialValues: {
