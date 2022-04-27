@@ -78,6 +78,7 @@ const CreateVisit = () => {
         roomID: values.roomID,
       };
       addVisit(visit);
+      console.log("Submitted");
       navigate("/patient");
     },
     validationSchema,
@@ -133,6 +134,7 @@ const CreateVisit = () => {
     <form id="createPatient" onSubmit={formik.handleSubmit}>
       <div className="mb-5">
         <Button
+          type="button"
           label="Add Operation"
           className="mb-5"
           onClick={() => {
