@@ -16,6 +16,7 @@ import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
+import { InputNumber } from "primereact/inputnumber";
 
 const CreateVisit = () => {
   const doctorVisit = useStore((state) => state.doctorVisit);
@@ -258,7 +259,7 @@ const CreateVisit = () => {
         <label htmlFor="price" className="mb-1 inline-block">
           Cost:
         </label>
-        <InputText
+        <InputNumber
           id="price"
           className="inputfield w-full mb-5"
           name="price"
