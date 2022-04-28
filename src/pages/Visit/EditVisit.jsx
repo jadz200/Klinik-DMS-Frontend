@@ -110,7 +110,7 @@ const Form = ({ visit }) => {
   }
 
   const doctorsOptions = doctors
-    .filter((doctor) => doctor.roleID === 1)
+    .filter((doctor) => doctor.roleID === 2)
     .map((doctor) => {
       return {
         label: doctor.first_name,

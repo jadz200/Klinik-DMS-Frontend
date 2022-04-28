@@ -28,7 +28,7 @@ const ListSecretary = () => {
         }}
         value={secretaries.filter(
           (secretary) =>
-            secretary.roleID === 2 &&
+            secretary.roleID === 1 &&
             (secretary.first_name
               .toLocaleLowerCase()
               .includes(filter.toLocaleLowerCase()) ||

@@ -30,7 +30,7 @@ const ListDoctor = () => {
         }}
         value={doctors.filter(
           (doctor) =>
-            doctor.roleID === 1 &&
+            doctor.roleID === 2 &&
             (doctor.first_name
               .toLocaleLowerCase()
               .includes(filter.toLocaleLowerCase()) ||
