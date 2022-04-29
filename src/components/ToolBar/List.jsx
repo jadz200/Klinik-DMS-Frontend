@@ -1,16 +1,45 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Button } from "primereact/button";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useStore } from "../../hooks/Store/useStore";
 import { confirmDialog } from "primereact/confirmdialog";
 import { Toast } from "primereact/toast";
+import { Dialog } from "primereact/dialog";
+import { InputTextarea } from "primereact/inputtextarea";
+import axios from "axios";
+import { baseURL } from "../../utils/baseURL";
 
 const List = ({ deleteFunction }) => {
+  const [visible, setVisible] = useState(false);
+  const [message, setMessage] = useState("");
   const location = useLocation();
 
   const showCUD =
     location.pathname.includes("doctor") ||
     location.pathname.includes("secretary");
+
+  const showBroadcast = location.pathname.includes("patient");
+
+  const footer = (
+    <div>
+      <Button
+        label="Send"
+        icon="pi pi-check"
+        onClick={() => {
+          axios
+            .post(`${baseURL}/sms/broadcast/`, { message })
+            .then((resp) => {
+              console.log(resp);
+            })
+            .catch((err) => {
+              console.log(err.response);
+            });
+          setVisible(false);
+          setMessage("");
+        }}
+      />
+    </div>
+  );
 
   const toast = useRef(null);
   const accept = () => {
@@ -44,6 +73,18 @@ const List = ({ deleteFunction }) => {
   return (
     <>
       <Toast ref={toast} />
+      {showBroadcast && (
+        <Button
+          label="Broadcast Message"
+          icon="pi pi-send"
+          iconPos="right"
+          className="p-button-sm p-button-info"
+          onClick={() => {
+            removeAllSelecetedItems();
+            setVisible(true);
+          }}
+        />
+      )}
       {!showCUD && (
         <Button
           label="Create"
@@ -56,6 +97,7 @@ const List = ({ deleteFunction }) => {
           }}
         />
       )}
+
       {!showCUD && (
         <Button
           label="Edit"
@@ -92,6 +134,20 @@ const List = ({ deleteFunction }) => {
           onClick={confirmDelete}
         />
       )}
+      <Dialog
+        header="Send Message to all Patients"
+        visible={visible}
+        style={{ width: "50vw" }}
+        onHide={() => setVisible(false)}
+        footer={footer}
+      >
+        <InputTextarea
+          className="w-full"
+          rows={4}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+        />
+      </Dialog>
     </>
   );
 };
