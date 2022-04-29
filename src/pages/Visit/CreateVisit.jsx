@@ -79,7 +79,6 @@ const CreateVisit = () => {
         roomID: values.roomID,
       };
       addVisit(visit);
-      console.log("Submitted");
       navigate("/patient");
     },
     validationSchema,
@@ -246,7 +245,6 @@ const CreateVisit = () => {
           onChange={(e) => {
             const operation = e.target.value;
             setVisitOperation(operation);
-            console.log(e.target.value);
             if (operation == 2) {
               setPrice(10);
             } else if (operation == 3) {
@@ -277,8 +275,6 @@ const CreateVisit = () => {
               ...visitOperations,
               { id: visitOperation, cost: price },
             ]);
-            console.log(price);
-            console.log({ id: visitOperation, cost: price });
             setVisitOperation("");
             setPrice(0);
             setVisible(false);
@@ -286,7 +282,6 @@ const CreateVisit = () => {
             visitOperations.forEach((op) => {
               sum += op.cost;
             });
-            console.log(sum + price);
             formik.setFieldValue("cost", sum + price);
           }}
         />

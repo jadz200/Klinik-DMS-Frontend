@@ -18,8 +18,6 @@ const ListDoctor = () => {
     return <h2>{error.message}</h2>;
   }
 
-  console.log(doctors);
-
   return (
     <>
       <DataTable

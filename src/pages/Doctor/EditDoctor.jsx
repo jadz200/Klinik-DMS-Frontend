@@ -10,7 +10,6 @@ import { useEditDoctorData } from "../../hooks/Queries/useDoctorsData";
 const EditDoctor = () => {
   const { id } = useParams();
   const { isLoading, data, error, isError, isPreviousData } = useDoctorData(id);
-  console.log(data);
 
   if (isLoading || isPreviousData) {
     return <h2>Loading...</h2>;
@@ -28,7 +27,6 @@ const EditDoctor = () => {
 };
 
 const Form = ({ data, id }) => {
-  console.log(data);
   const { mutate: editDoctor } = useEditDoctorData();
   const navigate = useNavigate();
   const validationSchema = Yup.object({

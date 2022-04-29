@@ -18,7 +18,6 @@ import { useStore } from "../../hooks/Store/useStore";
 
 const EditVisit = () => {
   const { id, visitID } = useParams();
-  console.log(id, visitID);
   const setCurrentItem = useStore((state) => state.setCurrentItem);
 
   const {
@@ -33,8 +32,6 @@ const EditVisit = () => {
     isError: patientIsError,
   } = usePatientData(id);
 
-  console.log(visit);
-
   if (visitIsError | patientIsError) {
     return <div>Error</div>;
   }
@@ -42,7 +39,6 @@ const EditVisit = () => {
   if (visitIsLoading | patientIsLoading) {
     return <div>Loading</div>;
   }
-  console.log(patient);
   setCurrentItem("Edit Visit " + patient.first_name + "  " + patient.last_name);
 
   return <Form visit={visit} />;
@@ -61,8 +57,6 @@ const Form = ({ visit }) => {
     roomID: Yup.string().required("Room is Required"),
   });
 
-  console.log(visit.date);
-
   const formik = useFormik({
     initialValues: {
       date: parseJSON(visit.date),
@@ -72,7 +66,6 @@ const Form = ({ visit }) => {
       roomID: visit.roomID,
     },
     onSubmit: (values) => {
-      console.log(values);
       let visit = {
         id: visitID,
         date: formatISO(values.date),

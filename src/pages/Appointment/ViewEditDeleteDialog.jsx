@@ -14,7 +14,6 @@ import { useNavigate } from "react-router-dom";
 const ViewEditDeleteDialog = ({ visible, setVisible }) => {
   const navigate = useNavigate();
   const patientVisit = useStore((state) => state.patientVisit);
-  console.log(patientVisit);
   const { id } = useParams();
   const { data, isLoading, isError, Error } = useAppointmentData(id);
   const { mutate: deleteAppointment } = useDeleteAppointmentData();
@@ -70,7 +69,6 @@ const ViewEditDeleteDialog = ({ visible, setVisible }) => {
   } else if (isLoading) {
     return <div>Loading...</div>;
   }
-  console.log(data);
   return (
     <Dialog
       header="Appointment"

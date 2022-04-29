@@ -26,7 +26,6 @@ const CreateDoctor = () => {
     },
     onSubmit: (values) => {
       let doctor = { ...values, clinicID: 1, roleID: 1 };
-      console.log(doctor);
       addDoctor(doctor);
 
       navigate("/doctor");

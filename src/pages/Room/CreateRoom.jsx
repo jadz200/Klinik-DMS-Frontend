@@ -18,7 +18,6 @@ const CreateRoom = () => {
     },
     onSubmit: (values) => {
       let room = { ...values, clinicID: 1 };
-      console.log(room);
       addRoom(room);
 
       navigate("/room");

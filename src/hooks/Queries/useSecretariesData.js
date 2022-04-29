@@ -11,7 +11,6 @@ const fetchSecretaries = () => {
 };
 
 const addSectretary = (secretary) => {
-  console.log(secretary);
   return axios.post(`${baseURL}/user/create/`, secretary);
 };
 

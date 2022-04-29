@@ -26,7 +26,6 @@ const CreateSecretary = () => {
     },
     onSubmit: (values) => {
       let secretary = { ...values, clinicID: 1, roleID: 2 };
-      console.log(secretary);
       addSecretary(secretary);
 
       navigate("/secretary");

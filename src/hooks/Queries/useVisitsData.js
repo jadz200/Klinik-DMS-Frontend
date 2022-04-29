@@ -12,7 +12,6 @@ const fetchPatientVisits = ({ queryKey }) => {
 };
 
 const addVisit = (visit) => {
-  console.log(visit);
   return axios.post(`${baseURL}/visit/create/`, visit);
 };
 

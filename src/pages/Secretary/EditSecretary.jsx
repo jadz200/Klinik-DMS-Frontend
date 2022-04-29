@@ -11,7 +11,6 @@ import { Card } from "primereact/card";
 const EditSecretary = () => {
   const { id } = useParams();
   const { isLoading, data, error, isError } = useSecretaryData(id);
-  console.log(data);
 
   if (isLoading) {
     return <h2>Loading...</h2>;
@@ -29,7 +28,6 @@ const EditSecretary = () => {
 };
 
 const Form = ({ data, id }) => {
-  console.log(data);
   const { mutate: editSecretary } = useEditSecretaryData();
   const navigate = useNavigate();
   const validationSchema = Yup.object({

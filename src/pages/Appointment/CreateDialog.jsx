@@ -21,7 +21,6 @@ const CreateDialog = ({
   patientAppointment,
 }) => {
   const { mutate: addAppointment } = useAddAppointmentData();
-  console.log(patientAppointment);
 
   const {
     data: doctors,

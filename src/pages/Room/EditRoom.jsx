@@ -10,7 +10,6 @@ import * as Yup from "yup";
 const EditRoom = () => {
   const { id } = useParams();
   const { isLoading, data, error, isError } = useRoomData(id);
-  console.log(data);
 
   if (isLoading) {
     return <h2>Loading...</h2>;
@@ -28,7 +27,6 @@ const EditRoom = () => {
 };
 
 const Form = ({ data, id }) => {
-  console.log(data);
   const { mutate: editRoom } = useEditRoomData();
   const navigate = useNavigate();
   const validationSchema = Yup.object({

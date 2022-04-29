@@ -58,7 +58,6 @@ const DetailPatient = () => {
   };
 
   const visits = patientVisits.map((visit) => {
-    console.log(visit.date);
     const date = format(parseJSON(visit.date), "yyyy-MM-dd' at 'HH:mm");
     return { ...visit, date };
   });
@@ -135,9 +134,6 @@ const DetailPatient = () => {
               header="Actions"
               body={actionButtonsTemplate}
               style={{ width: "20%" }}
-              onClick={(e) => {
-                console.log(e);
-              }}
             ></Column>
           </DataTable>
         </TabPanel>

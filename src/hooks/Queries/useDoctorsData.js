@@ -11,7 +11,6 @@ const fetchDoctors = () => {
 };
 
 const addDoctor = (doctor) => {
-  console.log(doctor);
   return axios.post(`${baseURL}/user/create/`, doctor);
 };
 
