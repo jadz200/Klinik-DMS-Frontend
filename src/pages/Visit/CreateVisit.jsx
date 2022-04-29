@@ -266,7 +266,7 @@ const CreateVisit = () => {
           autoComplete="nope"
           value={price}
           onChange={(e) => {
-            setPrice(e.target.value);
+            setPrice(e.value);
           }}
         />
         <Button
@@ -277,6 +277,8 @@ const CreateVisit = () => {
               ...visitOperations,
               { id: visitOperation, cost: price },
             ]);
+            console.log(price);
+            console.log({ id: visitOperation, cost: price });
             setVisitOperation("");
             setPrice(0);
             setVisible(false);
