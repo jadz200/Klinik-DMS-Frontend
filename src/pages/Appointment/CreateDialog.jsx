@@ -55,7 +55,7 @@ const CreateDialog = ({
     initialValues: {
       date: dateSelected,
       reason: "",
-      duration: 30,
+      duration: 60,
       roomID: "",
       doctorID: "",
       patientID: patientAppointment?.id ? patientAppointment.id : "",
@@ -137,7 +137,7 @@ const CreateDialog = ({
           {/*  */}
           <div className="w-6">
             <label htmlFor="duration" className="mb-1 inline-block">
-              Duration:
+              Duration (in minutes):
             </label>
             <InputNumber
               id="duration"
