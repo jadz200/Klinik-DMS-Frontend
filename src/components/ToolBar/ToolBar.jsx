@@ -60,10 +60,12 @@ const ToolBar = ({ moduleName, deleteFunction, setDialog }) => {
                   navigate(-1);
                 }}
               />
-              <div>{currentItem}</div>
+              <div className="text-xl font-bold">{currentItem}</div>
             </div>
           )}
-          {patientAppointment ? patientAppointment.first_name : ""}
+          <p className="text-xl font-bold">
+            {patientAppointment ? patientAppointment.first_name : ""}
+          </p>
         </div>
       ) : (
         <div className="ml-3">
