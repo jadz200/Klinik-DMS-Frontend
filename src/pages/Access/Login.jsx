@@ -24,7 +24,7 @@ const Login = () => {
   const redirectPath = location.state?.path || "/";
   const loginUser = (email, password) => {
     axios
-      .post("https://klinik-dms-backend.herokuapp.com/auth/token/", {
+      .post("https://web-production-6427.up.railway.app/auth/token/", {
         email,
         password,
       })
